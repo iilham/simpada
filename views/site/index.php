@@ -54,42 +54,42 @@ $okt = [0];
 $nov = [0];
 $des = [0];
 for ($jumlah = 0; $jumlah < count($realis); $jumlah++) {
-    $a[$jumlah] = $realis[$jumlah][realisasi];
-    if ($realis[$jumlah][bulan_id] == 1) {
-        $jan[$jumlah] = $realis[$jumlah][realisasi];
+    $a[$jumlah] = $realis[$jumlah]["realisasi"];
+    if ($realis[$jumlah]["bulan_id"] == 1) {
+        $jan[$jumlah] = $realis[$jumlah]["realisasi"];
     }
-    if ($realis[$jumlah][bulan_id] == 2) {
-        $feb[$jumlah] = $realis[$jumlah][realisasi];
+    if ($realis[$jumlah]["bulan_id"] == 2) {
+        $feb[$jumlah] = $realis[$jumlah]["realisasi"];
     }
-    if ($realis[$jumlah][bulan_id] == 3) {
-        $mar[$jumlah] = $realis[$jumlah][realisasi];
+    if ($realis[$jumlah]["bulan_id"] == 3) {
+        $mar[$jumlah] = $realis[$jumlah]["realisasi"];
     }
-    if ($realis[$jumlah][bulan_id] == 4) {
-        $apr[$jumlah] = $realis[$jumlah][realisasi];
+    if ($realis[$jumlah]["bulan_id"] == 4) {
+        $apr[$jumlah] = $realis[$jumlah]["realisasi"];
     }
-    if ($realis[$jumlah][bulan_id] == 5) {
-        $meii[$jumlah] = $realis[$jumlah][realisasi];
+    if ($realis[$jumlah]["bulan_id"] == 5) {
+        $meii[$jumlah] = $realis[$jumlah]["realisasi"];
     }
-    if ($realis[$jumlah][bulan_id] == 6) {
-        $jun[$jumlah] = $realis[$jumlah][realisasi];
+    if ($realis[$jumlah]["bulan_id"] == 6) {
+        $jun[$jumlah] = $realis[$jumlah]["realisasi"];
     }
-    if ($realis[$jumlah][bulan_id] == 7) {
-        $jul[$jumlah] = $realis[$jumlah][realisasi];
+    if ($realis[$jumlah]["bulan_id"] == 7) {
+        $jul[$jumlah] = $realis[$jumlah]["realisasi"];
     }
-    if ($realis[$jumlah][bulan_id] == 8) {
-        $ags[$jumlah] = $realis[$jumlah][realisasi];
+    if ($realis[$jumlah]["bulan_id"] == 8) {
+        $ags[$jumlah] = $realis[$jumlah]["realisasi"];
     }
-    if ($realis[$jumlah][bulan_id] == 9) {
-        $sep[$jumlah] = $realis[$jumlah][realisasi];
+    if ($realis[$jumlah]["bulan_id"] == 9) {
+        $sep[$jumlah] = $realis[$jumlah]["realisasi"];
     }
-    if ($realis[$jumlah][bulan_id] == 10) {
-        $okt[$jumlah] = $realis[$jumlah][realisasi];
+    if ($realis[$jumlah]["bulan_id"] == 10) {
+        $okt[$jumlah] = $realis[$jumlah]["realisasi"];
     }
-    if ($realis[$jumlah][bulan_id] == 11) {
-        $nov[$jumlah] = $realis[$jumlah][realisasi];
+    if ($realis[$jumlah]["bulan_id"] == 11) {
+        $nov[$jumlah] = $realis[$jumlah]["realisasi"];
     }
-    if ($realis[$jumlah][bulan_id] == 12) {
-        $des[$jumlah] = $realis[$jumlah][realisasi];
+    if ($realis[$jumlah]["bulan_id"] == 12) {
+        $des[$jumlah] = $realis[$jumlah]["realisasi"];
     }
 };
 $januari = array_sum($jan);
