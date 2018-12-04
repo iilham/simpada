@@ -1,0 +1,83 @@
+<?php
+
+namespace app\models;
+
+use Yii;
+use yii\base\Model;
+use yii\data\ActiveDataProvider;
+use app\models\Dipa;
+
+/**
+ * DipaSearch represents the model behind the search form of `app\models\Dipa`.
+ */
+class DipaSearch extends Dipa
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['id', 'baris', 'vol', 'hargasat', 'jumlah', 'dipamaster_id'], 'integer'],
+            [['kode', 'program', 'kegiatan', 'output', 'suboutput', 'komponen', 'subkomp', 'akun', 'uraian', 'sat'], 'safe'],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function scenarios()
+    {
+        // bypass scenarios() implementation in the parent class
+        return Model::scenarios();
+    }
+
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public function search($params)
+    {
+        $query = Dipa::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'baris' => $this->baris,
+            'vol' => $this->vol,
+            'hargasat' => $this->hargasat,
+            'jumlah' => $this->jumlah,
+            'dipamaster_id' => $this->dipamaster_id,
+        ]);
+
+        $query->andFilterWhere(['like', 'kode', $this->kode])
+            ->andFilterWhere(['like', 'program', $this->program])
+            ->andFilterWhere(['like', 'kegiatan', $this->kegiatan])
+            ->andFilterWhere(['like', 'output', $this->output])
+            ->andFilterWhere(['like', 'suboutput', $this->suboutput])
+            ->andFilterWhere(['like', 'komponen', $this->komponen])
+            ->andFilterWhere(['like', 'subkomp', $this->subkomp])
+            ->andFilterWhere(['like', 'akun', $this->akun])
+            ->andFilterWhere(['like', 'uraian', $this->uraian])
+            ->andFilterWhere(['like', 'sat', $this->sat]);
+
+        return $dataProvider;
+    }
+}
