@@ -74,8 +74,8 @@ class DipaController extends Controller {
 
     public function actionCreate() {
         $model = new Dipa();
-        $model1 = new DipaMaster();
-        if ($model1->load(Yii::$app->request->post())) {
+        $model2 = new DipaMaster();
+        if ($model2->load(Yii::$app->request->post())) {
             $sel = 'SELECT `id` FROM `dipa`';
             $acek = \Yii::$app->db->createCommand($sel)->queryAll();
             if ($acek != null) {
@@ -86,15 +86,15 @@ class DipaController extends Controller {
                 $updt = 'UPDATE `diparealisasi` SET `keterangan`= 0 WHERE 1';
                 \Yii::$app->db->createCommand($updt)->execute();
             }
-            $model1->file = UploadedFile::getInstance($model1, 'file');
-            $model1->user_id = Yii::$app->user->id;
-            $model1->tahun = date("Y");
+            $model2->file = UploadedFile::getInstance($model2, 'file');
+            $model2->user_id = Yii::$app->user->id;
+            $model2->tahun = date("Y");
             if (Yii::$app->request->post()) {
-                $model1->file = \yii\web\UploadedFile::getInstance($model1, 'file');
-                if ($model1->file && $model1->validate()) {
-                    $inputFileType = \PHPExcel_IOFactory::identify($model1->file->tempName);
+                $model2->file = \yii\web\UploadedFile::getInstance($model2, 'file');
+                if ($model2->file && $model2->validate()) {
+                    $inputFileType = \PHPExcel_IOFactory::identify($model2->file->tempName);
                     $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
-                    $objPHPExcel = $objReader->load($model1->file->tempName);
+                    $objPHPExcel = $objReader->load($model2->file->tempName);
                     $sheetData = $objPHPExcel->getActiveSheet()->toArray(null, true, true, true);
                     $sheet = $objPHPExcel->getSheet(0);
                     $baris = $sheet->getHighestRow();
@@ -339,15 +339,15 @@ class DipaController extends Controller {
                 }
             }
 
-            $model1->save(false);
-            if ($model1->file) {
+            $model2->save(false);
+            if ($model2->file) {
                 $uploadPath = "uploads/";
-                $succesSave = $model1->file->saveAs($uploadPath . $model1->file);
+                $succesSave = $model2->file->saveAs($uploadPath . $model2->file);
             }
             Yii::$app->session->setFlash('success', 'Upload Sukses');
         }
         return $this->render('create', [
-                    'model' => $model, 'model1' => $model1,
+                    'model' => $model, 'model2' => $model2,
         ]);
     }
 

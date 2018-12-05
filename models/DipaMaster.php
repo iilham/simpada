@@ -35,7 +35,7 @@ class DipaMaster extends \yii\db\ActiveRecord
         return [
             // [['tahun', 'file'], 'required'],
             [['user_id'], 'integer'],
-            [['timestamp'], 'safe'],
+            [['timestamp','file'], 'safe'],
             [['tahun'], 'string', 'max' => 4],
             [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'xlsx, xlx, xls'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -51,7 +51,7 @@ class DipaMaster extends \yii\db\ActiveRecord
             'id' => 'ID',
             'tahun' => 'Tahun',
             'user_id' => 'User ID',
-            'file' => 'File',
+            'filee' => 'File',
             'timestamp' => 'Timestamp',
         ];
     }

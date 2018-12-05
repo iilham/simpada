@@ -20,8 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
  <div class="panel panel-default">
      <div class="panel-heading">Silahkan upload file RKAKL di sini!</div>
      <div class="panel-body">
-         <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
-         <?= $form->field($model1, 'file')->fileInput() ?>
+         <?= $form->field($model2, 'file')->fileInput() ?>
          <div class="form-group">
              <?= Html::submitButton('Upload', ['class' => 'btn btn-primary']); ?>
          </div>
