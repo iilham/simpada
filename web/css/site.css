@@ -72,13 +72,8 @@ a.desc:after {
     content: "\e156";
 }
 
-.grid-view td {
+.grid-view th {
     white-space: nowrap;
-}
-
-.grid-view .filters input,
-.grid-view .filters select {
-    min-width: 50px;
 }
 
 .hint-block {

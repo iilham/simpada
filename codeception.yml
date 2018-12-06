@@ -1,15 +1,37 @@
-namespace: backend\tests
-actor_suffix: Tester
+actor: Tester
 paths:
     tests: tests
-    output: tests/_output
+    log: tests/_output
     data: tests/_data
-    support: tests/_support
+    helpers: tests/_support
 settings:
     bootstrap: _bootstrap.php
-    colors: true
     memory_limit: 1024M
+    colors: true
 modules:
     config:
         Yii2:
-            configFile: 'config/test-local.php'
+            configFile: 'config/test.php'
+            cleanup: false
+
+# To enable code coverage:
+#coverage:
+#    #c3_url: http://localhost:8080/index-test.php/
+#    enabled: true
+#    #remote: true
+#    #remote_config: '../codeception.yml'
+#    whitelist:
+#        include:
+#            - models/*
+#            - controllers/*
+#            - commands/*
+#            - mail/*
+#    blacklist:
+#        include:
+#            - assets/*
+#            - config/*
+#            - runtime/*
+#            - vendor/*
+#            - views/*
+#            - web/*
+#            - tests/*
