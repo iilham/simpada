@@ -1579,7 +1579,6 @@ class DiparealisasiController extends Controller {
                             , 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => $akun, 'uraian' => $uraian])->execute();
                 $dell = "DELETE FROM `diparealisasi` WHERE `id`= $id";
                 \Yii::$app->db->createCommand($dell)->execute();
-
                 break;
             case "10":
                 $program1 = (new \yii\db\Query())
@@ -1716,6 +1715,8 @@ class DiparealisasiController extends Controller {
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['desember' => $detil1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
                             , 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => $akun, 'uraian' => $uraian])->execute();
+                 $dell = "DELETE FROM `diparealisasi` WHERE `id`= $id";
+                \Yii::$app->db->createCommand($dell)->execute();
                 break;
         }
 
