@@ -255,13 +255,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'uraian' => $data->uraian,
                             ])
                             ->sum('jumlah');
-                    print_r($jum);
-                    die();
                     if (array_sum($realis[0]) == true) {
 //                            for ($jumlah = 0; $jumlah < count($realis); $jumlah++) {
 //                                $a[$jumlah] = $realis[$jumlah][realisasi];
 //                            };
                         $uang = array_sum($realis[0]);
+                        print_r($realis[0]);
+                        die();
                         if ($uang / $jum * 100 > 100) {
                             return "<font color='red'>" . round($uang / $jum * 100, 2) . ' %</font>';
                         } else {
