@@ -255,6 +255,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'uraian' => $data->uraian,
                             ])
                             ->sum('jumlah');
+                    print_r($jum);
+                    die();
                     if (array_sum($realis[0]) == true) {
 //                            for ($jumlah = 0; $jumlah < count($realis); $jumlah++) {
 //                                $a[$jumlah] = $realis[$jumlah][realisasi];

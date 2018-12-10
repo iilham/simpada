@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -12,19 +13,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="dipa-create">
 
-<!--     <h1><?= Html::encode($this->title) ?></h1>
- -->
+   
+
     <?php $form = ActiveForm::begin();
-	?>
-	
- <div class="panel panel-default">
-     <div class="panel-heading">Silahkan upload file RKAKL di sini!</div>
-     <div class="panel-body">
-         <?= $form->field($model2, 'file')->fileInput() ?>
-         <div class="form-group">
-             <?= Html::submitButton('Upload', ['class' => 'btn btn-primary']); ?>
-         </div>
-     </div>
- </div>
-    <?php ActiveForm::end(); ?>
+    ?>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><i class="fa fa-cog fa-spin fa-2x fa-fw"></i>Silahkan upload file RKAKL di sini!</div>
+        <div class="panel-body">
+            <?= $form->field($model2, 'file')->fileInput() ?>
+            <div class="form-group">
+            <?= Html::submitButton('Upload', ['class' => 'btn btn-primary']); ?>
+            </div>
+        </div>
+    </div>
+<?php ActiveForm::end(); ?>
 </div>

@@ -30,10 +30,10 @@ $helper = Yii::$app->myHelper;
                     'options' => ['class' => 'sidebar-menu tree', 'data-widget' => 'tree'],
                     'items' => [
                             ['label' => 'Menu', 'options' => ['class' => 'header']],
-                            ['label' => 'Terima Pagu', 'icon' => 'dashboard', 'url' => ['/dipa/create']],
+                            ['label' => 'Terima Pagu', 'icon' => 'file-excel-o', 'url' => ['/dipa/create']],
                             ['label' => 'Entri Data', 'icon' => 'file-code-o', 'url' => ['/dipa']],
-                            ['label' => 'Monitoring', 'icon' => 'dashboard', 'url' => ['/diparealisasi']],
-                            ['label' => 'Grafik Realisasi', 'icon' => 'dashboard', 'url' => ['/site']],
+                            ['label' => 'Monitoring', 'icon' => 'database', 'url' => ['/diparealisasi']],
+                            ['label' => 'Grafik Realisasi', 'icon' => 'bar-chart', 'url' => ['/site']],
                             ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                             [
                             'label' => 'Pengaturan',

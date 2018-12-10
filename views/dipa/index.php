@@ -56,65 +56,33 @@ Modal::end();
                         'showPageSummary' => $pageSummary,
                         'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => ''],
                         'hover' => true,
-//                        'panel' => [
-//            'type' => GridView::TYPE_PRIMARY,
-//            'heading' => '<i class="glyphicon glyphicon-book"></i>  ' . $tekscari
-//                        ],
-//                        'beforeHeader' => [
-//                                [
-//                                'columns' => [
-//                                        ['content' => 'Kode', 'options' => ['colspan' => 3, 'class' => 'text-center info']],
-//                                        ['content' => ' ', 'options' => ['colspan' => 2, 'class' => 'text-center info']],
-//                                ],
-////                    'options' => ['class' => 'skip-export'] // remove this row from export
-//                            ]
-//                        ],
                         'toolbar' => [
                                 ['content' =>
                                 Html::a('<i class = "glyphicon glyphicon-repeat"></i>', Url::toRoute([]), ['data-pjax' => 0, 'class' => 'btn btn-default', 'title' => Yii::t('kvgrid', 'Reset Grid')])
                             ],
-//                '{export}',
                             '{toggleData}',
                         ],
-//            'toolbar' => [''],
                         'containerOptions' => ['style' => 'overflow: auto', 'style' => 'font-size:12px;'], // only set when $responsive = false
                         'headerRowOptions' => ['class' => 'text-center info', 'style' => 'font-size:12px;'],
                         'filterRowOptions' => ['class' => 'kartik-sheet-style'],
                         'persistResize' => false,
                         'columns' => [
-//                    ['class' => 'yii\grid\SerialColumn'],
-//                'id',
-//                'baris',
-//                'kode',
-//            'program',
-//            'kegiatan',
-//            'output',
-//                'suboutput',
-//            'komponen',
-//            'subkomp',
-                            'akun',
+                                [
+                                'attribute' => 'akun',
+                                'value' => 'akun',
+                                'contentOptions' => ['style' => 'width:6%'],
+                            ],
                                 [
                                 'attribute' => 'uraian',
                                 'value' => 'uraian',
-                                'contentOptions' => ['style' => 'font-size:10px;'],
+                                'contentOptions' => ['style' => 'font-size:11px;'],
                             ],
-//                'uraian',
-//            'vol',
-//            'sat',
-//                [
-//                'attribute' => 'hargasat',
-//                'value' => function($data) {
-//                    return 'Rp ' . number_format($data->hargasat, 0);
-//                },
-//                'contentOptions' => ['class' => 'col-lg-1', 'style' => 'text-align: left;'],
-//                'filter' => false,
-//            ],
-                            [
+                                [
                                 'attribute' => 'jumlah',
                                 'value' => function($data) {
                                     return 'Rp ' . number_format($data->jumlah, 0);
                                 },
-                                'contentOptions' => ['class' => 'col-lg-1', 'style' => 'text-align: left;'],
+                                'contentOptions' => ['class' => 'col-lg-1', 'style' => 'text-align: left; width:13%'],
                                 'filter' => false,
                             ],
                                 [
@@ -150,7 +118,7 @@ Modal::end();
                                     if (array_sum($realis[0]) == true) {
                                         $uang = array_sum($realis[0]);
                                         if ($jum - $uang < 0) {
-                                            return "<font color='red'>Rp " . number_format($jum - $uang, 0).'</font>';
+                                            return "<font color='red'>Rp " . number_format($jum - $uang, 0) . '</font>';
                                         } else {
                                             return 'Rp ' . number_format($jum - $uang, 0);
                                         }
@@ -158,33 +126,12 @@ Modal::end();
                                         return 'Rp ' . number_format($data->jumlah, 0);
                                     }
                                 },
-                                'contentOptions' => ['class' => 'col-lg-1', 'style' => 'text-align: left;
-        '],
+                                'contentOptions' => ['class' => 'col-lg-1', 'style' => 'text-align: left;width:13%'],
                                 'filter' => false,
                             ],
-//            [
-//                'class' => 'yii\grid\ActionColumn',
-//                'options' => ['class' => 'action-column'],
-//                'template' => '{update}',
-//                'buttons' => [
-//                    'update' => function($url, $model) {
-//                        $btn = Html::button("<span class='glyphicon glyphicon-pencil'></span>", [
-//                                    'value' => Url::toRoute(['/diparealisasi/update?program=' . $model->program . '&&kegiatan=' . $model->kegiatan . '&&output=' . $model->output .
-//                                                '&&suboutput=' . $model->suboutput . '&&komponen=' . $model->komponen .
-//                                                '&&subkomp=' . $model->subkomp . '&&akun=' . $model->akun . '&&uraian=' . $model->uraian]), //<---- here is where you define the action that handles the ajax request
-//                                    'class' => 'update-modal-click grid-action',
-//                                    'data-toggle' => 'tooltip',
-//                                    'data-placement' => 'bottom',
-//                                    'title' => 'Update'
-//                        ]);
-//                        return $btn;
-//                    }
-//                ]
-//            ],z
-                            [
+                                [
                                 'class' => 'yii\grid\ActionColumn',
                                 'header' => '',
-//                'id' => 'modalButton',
                                 'headerOptions' => ['style' => 'color:#337ab7'],
                                 'template' => '{update}',
                                 'buttons' => [
@@ -194,21 +141,13 @@ Modal::end();
                                         } else {
                                             return Html::a('<span class="glyphicon glyphicon-pencil" id = "modalButton"></span>', Url::toRoute(['/diparealisasi/update?program=' . $model->program . '&&kegiatan=' . $model->kegiatan . '&&output=' . $model->output .
                                                                 '&&suboutput=' . $model->suboutput . '&&komponen=' . $model->komponen .
-                                                                '&&subkomp=' . $model->subkomp . '&&akun=' . $model->akun . '&&uraian=' . $model->uraian. '&&urll='.$_SERVER['REQUEST_URI']]), [
+                                                                '&&subkomp=' . $model->subkomp . '&&akun=' . $model->akun . '&&uraian=' . $model->uraian . '&&urll=' . $_SERVER['REQUEST_URI']]), [
                                                         'title' => Yii::t('app', 'update realisasi'), 'id' => 'modalButton',
 //                                                                    'target' => '_blank'
                                             ]);
                                         }
                                     },
                                 ],
-//                'urlCreator' => function ($action, $model) {
-//                    if ($action === 'update') {
-//                        $url = Url::toRoute(['/diparealisasi/update?program=' . $model->program . '&&kegiatan=' . $model->kegiatan . '&&output=' . $model->output .
-//                                    '&&suboutput=' . $model->suboutput . '&&komponen=' . $model->komponen .
-//                                    '&&subkomp=' . $model->subkomp . '&&akun=' . $model->akun . '&&uraian=' . $model->uraian]);
-//                        return $url;
-//                    }
-//                }
                             ],
                         ],
                     ]);
