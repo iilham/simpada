@@ -260,9 +260,10 @@ $this->params['breadcrumbs'][] = $this->title;
 //                                $a[$jumlah] = $realis[$jumlah][realisasi];
 //                            };
                         $uang = array_sum($realis[0]);
-                        print_r($realis[0]);
-                        die();
-                        if ($uang / $jum * 100 > 100) {
+                        if ($jum == 0) {
+                            return "<font color='red'>" . '(error)<br/>Jumlah = 0</font>';
+                        }
+                        elseif ($uang / $jum * 100 > 100) {
                             return "<font color='red'>" . round($uang / $jum * 100, 2) . ' %</font>';
                         } else {
                             return round($uang / $jum * 100, 2) . ' %';
