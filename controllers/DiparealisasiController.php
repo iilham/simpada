@@ -574,11 +574,12 @@ class DiparealisasiController extends Controller {
                 \Yii::$app->db->createCommand($updt)->execute();
             }
         } else {
-            return $this->render('index', [
+           '';
+        }
+         return $this->render('index', [
                         'searchModel' => $searchModel,
                         'dataProvider' => $dataProvider,
             ]);
-        }
     }
 
     public function actionView($id) {
