@@ -39,7 +39,6 @@ class DiparealisasiController extends Controller {
             $sel = 'SELECT `bulan_id`, `program`, `kegiatan`, `output`, `suboutput`, `komponen`, `subkomp`, `akun`, `uraian`, `realisasi` FROM `diparealisasi`';
             $ambil = \Yii::$app->db->createCommand($sel)->queryAll();
             for ($i = 0; $i <= count($ambil); $i++) {
-//            print_r($ambil[$i]['bulan_id']);
                 $bulan = $ambil[$i]['bulan_id'];
                 switch ($bulan) {
                     case "1":
