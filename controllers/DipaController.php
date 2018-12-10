@@ -72,6 +72,7 @@ class DipaController extends Controller {
         ]);
     }
 //UPDATE your_table SET column_that_you_want_to_change= REGEXP_REPLACE(column_that_you_want_to_change, '[[:space:]]+', ' ');
+//    UPDATE diparealisasi SET uraian= REGEXP_REPLACE(uraian, '[[:space:]]+', ' ');
     public function actionCreate() {
         $model = new Dipa();
         $model2 = new DipaMaster();
