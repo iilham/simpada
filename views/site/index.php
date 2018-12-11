@@ -74,7 +74,6 @@ $februari = array_sum($feb);
 $maret = array_sum($mar);
 $april = array_sum($apr);
 $mei = array_sum($meii);
-//print_r($mei);
 $juni = array_sum($jun);
 $juli = array_sum($jul);
 $agustus = array_sum($ags);
@@ -114,8 +113,5 @@ echo Highcharts::widget([
         ],
     ]
 ]);
-/* @var $this yii\web\View */
-
-// $this->title = 'My Yii Application';
 ?>
 

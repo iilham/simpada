@@ -44,28 +44,28 @@ class DiparealisasiController extends Controller {
                     case "1":
                         $program1 = (new \yii\db\Query())
                                         ->select(['januari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('januari');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('januari');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $kegiatan1 = (new \yii\db\Query())
                                         ->select(['januari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('januari');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('januari');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $output1 = (new \yii\db\Query())
                                         ->select(['januari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null])->sum('januari');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('januari');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $komponen1 = (new \yii\db\Query())
                                         ->select(['januari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->sum('januari');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('januari');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->execute();
+                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
                         $subkomp1 = (new \yii\db\Query())
                                         ->select(['januari'])->from('dipabulanan')
                                         ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('januari');
@@ -88,28 +88,28 @@ class DiparealisasiController extends Controller {
                     case "2":
                         $program1 = (new \yii\db\Query())
                                         ->select(['februari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('februari');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('februari');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $kegiatan1 = (new \yii\db\Query())
                                         ->select(['februari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('februari');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('februari');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $output1 = (new \yii\db\Query())
                                         ->select(['februari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null])->sum('februari');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('februari');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $komponen1 = (new \yii\db\Query())
                                         ->select(['februari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->sum('februari');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('februari');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->execute();
+                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
                         $subkomp1 = (new \yii\db\Query())
                                         ->select(['februari'])->from('dipabulanan')
                                         ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('februari');
@@ -132,28 +132,28 @@ class DiparealisasiController extends Controller {
                     case "3":
                         $program1 = (new \yii\db\Query())
                                         ->select(['maret'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('maret');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('maret');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $kegiatan1 = (new \yii\db\Query())
                                         ->select(['maret'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('maret');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('maret');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $output1 = (new \yii\db\Query())
                                         ->select(['maret'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null])->sum('maret');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('maret');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $komponen1 = (new \yii\db\Query())
                                         ->select(['maret'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->sum('maret');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('maret');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->execute();
+                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
                         $subkomp1 = (new \yii\db\Query())
                                         ->select(['maret'])->from('dipabulanan')
                                         ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('maret');
@@ -176,28 +176,28 @@ class DiparealisasiController extends Controller {
                     case "4":
                         $program1 = (new \yii\db\Query())
                                         ->select(['april'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('april');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('april');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $kegiatan1 = (new \yii\db\Query())
                                         ->select(['april'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('april');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('april');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $output1 = (new \yii\db\Query())
                                         ->select(['april'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null])->sum('april');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('april');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $komponen1 = (new \yii\db\Query())
                                         ->select(['april'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->sum('april');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('april');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->execute();
+                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
                         $subkomp1 = (new \yii\db\Query())
                                         ->select(['april'])->from('dipabulanan')
                                         ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('april');
@@ -220,28 +220,28 @@ class DiparealisasiController extends Controller {
                     case "5":
                         $program1 = (new \yii\db\Query())
                                         ->select(['mei'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('mei');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('mei');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $kegiatan1 = (new \yii\db\Query())
                                         ->select(['mei'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('mei');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('mei');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $output1 = (new \yii\db\Query())
                                         ->select(['mei'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null])->sum('mei');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('mei');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $komponen1 = (new \yii\db\Query())
                                         ->select(['mei'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->sum('mei');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('mei');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->execute();
+                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
                         $subkomp1 = (new \yii\db\Query())
                                         ->select(['mei'])->from('dipabulanan')
                                         ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('mei');
@@ -264,28 +264,28 @@ class DiparealisasiController extends Controller {
                     case "6":
                         $program1 = (new \yii\db\Query())
                                         ->select(['juni'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('juni');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juni');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $kegiatan1 = (new \yii\db\Query())
                                         ->select(['juni'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('juni');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juni');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $output1 = (new \yii\db\Query())
                                         ->select(['juni'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null])->sum('juni');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juni');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $komponen1 = (new \yii\db\Query())
                                         ->select(['juni'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->sum('juni');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('juni');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->execute();
+                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
                         $subkomp1 = (new \yii\db\Query())
                                         ->select(['juni'])->from('dipabulanan')
                                         ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('juni');
@@ -308,28 +308,28 @@ class DiparealisasiController extends Controller {
                     case "7":
                         $program1 = (new \yii\db\Query())
                                         ->select(['juli'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('juli');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juli');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $kegiatan1 = (new \yii\db\Query())
                                         ->select(['juli'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('juli');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juli');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $output1 = (new \yii\db\Query())
                                         ->select(['juli'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null])->sum('juli');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juli');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $komponen1 = (new \yii\db\Query())
                                         ->select(['juli'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->sum('juli');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('juli');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->execute();
+                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
                         $subkomp1 = (new \yii\db\Query())
                                         ->select(['juli'])->from('dipabulanan')
                                         ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('juli');
@@ -352,28 +352,28 @@ class DiparealisasiController extends Controller {
                     case "8":
                         $program1 = (new \yii\db\Query())
                                         ->select(['agustus'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('agustus');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('agustus');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $kegiatan1 = (new \yii\db\Query())
                                         ->select(['agustus'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('agustus');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('agustus');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $output1 = (new \yii\db\Query())
                                         ->select(['agustus'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null])->sum('agustus');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('agustus');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $komponen1 = (new \yii\db\Query())
                                         ->select(['agustus'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->sum('agustus');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('agustus');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->execute();
+                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
                         $subkomp1 = (new \yii\db\Query())
                                         ->select(['agustus'])->from('dipabulanan')
                                         ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('agustus');
@@ -396,28 +396,28 @@ class DiparealisasiController extends Controller {
                     case "9":
                         $program1 = (new \yii\db\Query())
                                         ->select(['september'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('september');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('september');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $kegiatan1 = (new \yii\db\Query())
                                         ->select(['september'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('september');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('september');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $output1 = (new \yii\db\Query())
                                         ->select(['september'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null])->sum('september');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('september');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $komponen1 = (new \yii\db\Query())
                                         ->select(['september'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->sum('september');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('september');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->execute();
+                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
                         $subkomp1 = (new \yii\db\Query())
                                         ->select(['september'])->from('dipabulanan')
                                         ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('september');
@@ -440,28 +440,28 @@ class DiparealisasiController extends Controller {
                     case "10":
                         $program1 = (new \yii\db\Query())
                                         ->select(['oktober'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('oktober');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('oktober');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $kegiatan1 = (new \yii\db\Query())
                                         ->select(['oktober'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('oktober');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('oktober');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $output1 = (new \yii\db\Query())
                                         ->select(['oktober'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null])->sum('oktober');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('oktober');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $komponen1 = (new \yii\db\Query())
                                         ->select(['oktober'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->sum('oktober');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('oktober');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->execute();
+                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
                         $subkomp1 = (new \yii\db\Query())
                                         ->select(['oktober'])->from('dipabulanan')
                                         ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('oktober');
@@ -484,28 +484,28 @@ class DiparealisasiController extends Controller {
                     case "11":
                         $program1 = (new \yii\db\Query())
                                         ->select(['november'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('november');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('november');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $kegiatan1 = (new \yii\db\Query())
                                         ->select(['november'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('november');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('november');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $output1 = (new \yii\db\Query())
                                         ->select(['november'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null])->sum('november');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('november');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $komponen1 = (new \yii\db\Query())
                                         ->select(['november'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->sum('november');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('november');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->execute();
+                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
                         $subkomp1 = (new \yii\db\Query())
                                         ->select(['november'])->from('dipabulanan')
                                         ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('november');
@@ -528,28 +528,28 @@ class DiparealisasiController extends Controller {
                     case "12":
                         $program1 = (new \yii\db\Query())
                                         ->select(['desember'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('desember');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('desember');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $kegiatan1 = (new \yii\db\Query())
                                         ->select(['desember'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('desember');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('desember');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $output1 = (new \yii\db\Query())
                                         ->select(['desember'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null])->sum('desember');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('desember');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null])->execute();
+                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                         $komponen1 = (new \yii\db\Query())
                                         ->select(['desember'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->sum('desember');
+                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('desember');
                         Yii::$app->db->createCommand()
                                 ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null])->execute();
+                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
                         $subkomp1 = (new \yii\db\Query())
                                         ->select(['desember'])->from('dipabulanan')
                                         ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('desember');
@@ -618,16 +618,16 @@ class DiparealisasiController extends Controller {
                 case "1":
                     $program1 = (new \yii\db\Query())
                                     ->select(['januari'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('januari');
+                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('januari');
                     $kegiatan1 = (new \yii\db\Query())
                                     ->select(['januari'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('januari');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('januari');
                     $output1 = (new \yii\db\Query())
                                     ->select(['januari'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null])->sum('januari');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('januari');
                     $komponen1 = (new \yii\db\Query())
                                     ->select(['januari'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null])->sum('januari');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->sum('januari');
                     $subkomp1 = (new \yii\db\Query())
                                     ->select(['januari'])->from('dipabulanan')
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->sum('januari');
@@ -639,16 +639,16 @@ class DiparealisasiController extends Controller {
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => $model->akun, 'uraian' => $model->uraian])->sum('januari');
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['januari' => $realisasi + $program1], ['program' => $model->program, 'kegiatan' => null, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['januari' => $realisasi + $kegiatan1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['januari' => $realisasi + $output1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['januari' => $realisasi + $komponen1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => $model->komponen, 'subkomp' => null])->execute();
+                                , 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['januari' => $realisasi + $subkomp1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
                                 , 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->execute();
@@ -662,16 +662,16 @@ class DiparealisasiController extends Controller {
                 case "2":
                     $program1 = (new \yii\db\Query())
                                     ->select(['februari'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('februari');
+                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('februari');
                     $kegiatan1 = (new \yii\db\Query())
                                     ->select(['februari'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('februari');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('februari');
                     $output1 = (new \yii\db\Query())
                                     ->select(['februari'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null])->sum('februari');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('februari');
                     $komponen1 = (new \yii\db\Query())
                                     ->select(['februari'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null])->sum('februari');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->sum('februari');
                     $subkomp1 = (new \yii\db\Query())
                                     ->select(['februari'])->from('dipabulanan')
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->sum('februari');
@@ -683,16 +683,16 @@ class DiparealisasiController extends Controller {
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => $model->akun, 'uraian' => $model->uraian])->sum('februari');
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['februari' => $realisasi + $program1], ['program' => $model->program, 'kegiatan' => null, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['februari' => $realisasi + $kegiatan1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['februari' => $realisasi + $output1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['februari' => $realisasi + $komponen1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => $model->komponen, 'subkomp' => null])->execute();
+                                , 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['februari' => $realisasi + $subkomp1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
                                 , 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->execute();
@@ -706,16 +706,16 @@ class DiparealisasiController extends Controller {
                 case "3":
                     $program1 = (new \yii\db\Query())
                                     ->select(['maret'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('maret');
+                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('maret');
                     $kegiatan1 = (new \yii\db\Query())
                                     ->select(['maret'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('maret');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('maret');
                     $output1 = (new \yii\db\Query())
                                     ->select(['maret'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null])->sum('maret');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('maret');
                     $komponen1 = (new \yii\db\Query())
                                     ->select(['maret'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null])->sum('maret');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->sum('maret');
                     $subkomp1 = (new \yii\db\Query())
                                     ->select(['maret'])->from('dipabulanan')
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->sum('maret');
@@ -727,16 +727,16 @@ class DiparealisasiController extends Controller {
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => $model->akun, 'uraian' => $model->uraian])->sum('maret');
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['maret' => $realisasi + $program1], ['program' => $model->program, 'kegiatan' => null, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['maret' => $realisasi + $kegiatan1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['maret' => $realisasi + $output1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['maret' => $realisasi + $komponen1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => $model->komponen, 'subkomp' => null])->execute();
+                                , 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['maret' => $realisasi + $subkomp1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
                                 , 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->execute();
@@ -750,16 +750,16 @@ class DiparealisasiController extends Controller {
                 case "4":
                     $program1 = (new \yii\db\Query())
                                     ->select(['april'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('april');
+                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('april');
                     $kegiatan1 = (new \yii\db\Query())
                                     ->select(['april'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('april');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('april');
                     $output1 = (new \yii\db\Query())
                                     ->select(['april'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null])->sum('april');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('april');
                     $komponen1 = (new \yii\db\Query())
                                     ->select(['april'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null])->sum('april');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->sum('april');
                     $subkomp1 = (new \yii\db\Query())
                                     ->select(['april'])->from('dipabulanan')
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->sum('april');
@@ -771,16 +771,16 @@ class DiparealisasiController extends Controller {
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => $model->akun, 'uraian' => $model->uraian])->sum('april');
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['april' => $realisasi + $program1], ['program' => $model->program, 'kegiatan' => null, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['april' => $realisasi + $kegiatan1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['april' => $realisasi + $output1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['april' => $realisasi + $komponen1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => $model->komponen, 'subkomp' => null])->execute();
+                                , 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['april' => $realisasi + $subkomp1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
                                 , 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->execute();
@@ -794,16 +794,16 @@ class DiparealisasiController extends Controller {
                 case "5":
                     $program1 = (new \yii\db\Query())
                                     ->select(['mei'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('mei');
+                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('mei');
                     $kegiatan1 = (new \yii\db\Query())
                                     ->select(['mei'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('mei');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('mei');
                     $output1 = (new \yii\db\Query())
                                     ->select(['mei'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null])->sum('mei');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('mei');
                     $komponen1 = (new \yii\db\Query())
                                     ->select(['mei'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null])->sum('mei');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->sum('mei');
                     $subkomp1 = (new \yii\db\Query())
                                     ->select(['mei'])->from('dipabulanan')
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->sum('mei');
@@ -815,16 +815,16 @@ class DiparealisasiController extends Controller {
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => $model->akun, 'uraian' => $model->uraian])->sum('mei');
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['mei' => $realisasi + $program1], ['program' => $model->program, 'kegiatan' => null, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['mei' => $realisasi + $kegiatan1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['mei' => $realisasi + $output1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['mei' => $realisasi + $komponen1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => $model->komponen, 'subkomp' => null])->execute();
+                                , 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['mei' => $realisasi + $subkomp1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
                                 , 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->execute();
@@ -838,16 +838,16 @@ class DiparealisasiController extends Controller {
                 case "6":
                     $program1 = (new \yii\db\Query())
                                     ->select(['juni'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('juni');
+                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juni');
                     $kegiatan1 = (new \yii\db\Query())
                                     ->select(['juni'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('juni');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juni');
                     $output1 = (new \yii\db\Query())
                                     ->select(['juni'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null])->sum('juni');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juni');
                     $komponen1 = (new \yii\db\Query())
                                     ->select(['juni'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null])->sum('juni');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->sum('juni');
                     $subkomp1 = (new \yii\db\Query())
                                     ->select(['juni'])->from('dipabulanan')
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->sum('juni');
@@ -859,16 +859,16 @@ class DiparealisasiController extends Controller {
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => $model->akun, 'uraian' => $model->uraian])->sum('juni');
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['juni' => $realisasi + $program1], ['program' => $model->program, 'kegiatan' => null, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['juni' => $realisasi + $kegiatan1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['juni' => $realisasi + $output1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['juni' => $realisasi + $komponen1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => $model->komponen, 'subkomp' => null])->execute();
+                                , 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['juni' => $realisasi + $subkomp1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
                                 , 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->execute();
@@ -882,16 +882,16 @@ class DiparealisasiController extends Controller {
                 case "7":
                     $program1 = (new \yii\db\Query())
                                     ->select(['juli'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('juli');
+                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juli');
                     $kegiatan1 = (new \yii\db\Query())
                                     ->select(['juli'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('juli');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juli');
                     $output1 = (new \yii\db\Query())
                                     ->select(['juli'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null])->sum('juli');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juli');
                     $komponen1 = (new \yii\db\Query())
                                     ->select(['juli'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null])->sum('juli');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->sum('juli');
                     $subkomp1 = (new \yii\db\Query())
                                     ->select(['juli'])->from('dipabulanan')
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->sum('juli');
@@ -903,16 +903,16 @@ class DiparealisasiController extends Controller {
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => $model->akun, 'uraian' => $model->uraian])->sum('juli');
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['juli' => $realisasi + $program1], ['program' => $model->program, 'kegiatan' => null, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['juli' => $realisasi + $kegiatan1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['juli' => $realisasi + $output1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['juli' => $realisasi + $komponen1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => $model->komponen, 'subkomp' => null])->execute();
+                                , 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['juli' => $realisasi + $subkomp1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
                                 , 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->execute();
@@ -926,16 +926,16 @@ class DiparealisasiController extends Controller {
                 case "8":
                     $program1 = (new \yii\db\Query())
                                     ->select(['agustus'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('agustus');
+                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('agustus');
                     $kegiatan1 = (new \yii\db\Query())
                                     ->select(['agustus'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('agustus');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('agustus');
                     $output1 = (new \yii\db\Query())
                                     ->select(['agustus'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null])->sum('agustus');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('agustus');
                     $komponen1 = (new \yii\db\Query())
                                     ->select(['agustus'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null])->sum('agustus');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->sum('agustus');
                     $subkomp1 = (new \yii\db\Query())
                                     ->select(['agustus'])->from('dipabulanan')
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->sum('agustus');
@@ -947,16 +947,16 @@ class DiparealisasiController extends Controller {
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => $model->akun, 'uraian' => $model->uraian])->sum('agustus');
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['agustus' => $realisasi + $program1], ['program' => $model->program, 'kegiatan' => null, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['agustus' => $realisasi + $kegiatan1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['agustus' => $realisasi + $output1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['agustus' => $realisasi + $komponen1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => $model->komponen, 'subkomp' => null])->execute();
+                                , 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['agustus' => $realisasi + $subkomp1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
                                 , 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->execute();
@@ -970,16 +970,16 @@ class DiparealisasiController extends Controller {
                 case "9":
                     $program1 = (new \yii\db\Query())
                                     ->select(['september'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('september');
+                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('september');
                     $kegiatan1 = (new \yii\db\Query())
                                     ->select(['september'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('september');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('september');
                     $output1 = (new \yii\db\Query())
                                     ->select(['september'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null])->sum('september');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('september');
                     $komponen1 = (new \yii\db\Query())
                                     ->select(['september'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null])->sum('september');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->sum('september');
                     $subkomp1 = (new \yii\db\Query())
                                     ->select(['september'])->from('dipabulanan')
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->sum('september');
@@ -991,16 +991,16 @@ class DiparealisasiController extends Controller {
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => $model->akun, 'uraian' => $model->uraian])->sum('september');
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['september' => $realisasi + $program1], ['program' => $model->program, 'kegiatan' => null, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['september' => $realisasi + $kegiatan1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['september' => $realisasi + $output1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['september' => $realisasi + $komponen1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => $model->komponen, 'subkomp' => null])->execute();
+                                , 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['september' => $realisasi + $subkomp1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
                                 , 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->execute();
@@ -1014,16 +1014,16 @@ class DiparealisasiController extends Controller {
                 case "10":
                     $program1 = (new \yii\db\Query())
                                     ->select(['oktober'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('oktober');
+                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('oktober');
                     $kegiatan1 = (new \yii\db\Query())
                                     ->select(['oktober'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('oktober');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('oktober');
                     $output1 = (new \yii\db\Query())
                                     ->select(['oktober'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null])->sum('oktober');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('oktober');
                     $komponen1 = (new \yii\db\Query())
                                     ->select(['oktober'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null])->sum('oktober');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->sum('oktober');
                     $subkomp1 = (new \yii\db\Query())
                                     ->select(['oktober'])->from('dipabulanan')
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->sum('oktober');
@@ -1035,16 +1035,16 @@ class DiparealisasiController extends Controller {
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => $model->akun, 'uraian' => $model->uraian])->sum('oktober');
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['oktober' => $realisasi + $program1], ['program' => $model->program, 'kegiatan' => null, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['oktober' => $realisasi + $kegiatan1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['oktober' => $realisasi + $output1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['oktober' => $realisasi + $komponen1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => $model->komponen, 'subkomp' => null])->execute();
+                                , 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['oktober' => $realisasi + $subkomp1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
                                 , 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->execute();
@@ -1058,16 +1058,16 @@ class DiparealisasiController extends Controller {
                 case "11":
                     $program1 = (new \yii\db\Query())
                                     ->select(['november'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('november');
+                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('november');
                     $kegiatan1 = (new \yii\db\Query())
                                     ->select(['november'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('november');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('november');
                     $output1 = (new \yii\db\Query())
                                     ->select(['november'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null])->sum('november');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('november');
                     $komponen1 = (new \yii\db\Query())
                                     ->select(['november'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null])->sum('november');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->sum('november');
                     $subkomp1 = (new \yii\db\Query())
                                     ->select(['november'])->from('dipabulanan')
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->sum('november');
@@ -1079,16 +1079,16 @@ class DiparealisasiController extends Controller {
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => $model->akun, 'uraian' => $model->uraian])->sum('november');
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['november' => $realisasi + $program1], ['program' => $model->program, 'kegiatan' => null, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['november' => $realisasi + $kegiatan1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['november' => $realisasi + $output1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['november' => $realisasi + $komponen1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => $model->komponen, 'subkomp' => null])->execute();
+                                , 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['november' => $realisasi + $subkomp1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
                                 , 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->execute();
@@ -1102,16 +1102,16 @@ class DiparealisasiController extends Controller {
                 case "12":
                     $program1 = (new \yii\db\Query())
                                     ->select(['desember'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('desember');
+                                    ->where(['program' => $model->program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('desember');
                     $kegiatan1 = (new \yii\db\Query())
                                     ->select(['desember'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('desember');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('desember');
                     $output1 = (new \yii\db\Query())
                                     ->select(['desember'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null])->sum('desember');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('desember');
                     $komponen1 = (new \yii\db\Query())
                                     ->select(['desember'])->from('dipabulanan')
-                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null])->sum('desember');
+                                    ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->sum('desember');
                     $subkomp1 = (new \yii\db\Query())
                                     ->select(['desember'])->from('dipabulanan')
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->sum('desember');
@@ -1123,16 +1123,16 @@ class DiparealisasiController extends Controller {
                                     ->where(['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output, 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => $model->akun, 'uraian' => $model->uraian])->sum('desember');
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['desember' => $realisasi + $program1], ['program' => $model->program, 'kegiatan' => null, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['desember' => $realisasi + $kegiatan1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => null
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['desember' => $realisasi + $output1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => null, 'subkomp' => null])->execute();
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['desember' => $realisasi + $komponen1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
-                                , 'komponen' => $model->komponen, 'subkomp' => null])->execute();
+                                , 'komponen' => $model->komponen, 'subkomp' => null, 'akun' => null])->execute();
                     Yii::$app->db->createCommand()
                             ->update('dipabulanan', ['desember' => $realisasi + $subkomp1], ['program' => $model->program, 'kegiatan' => $model->kegiatan, 'output' => $model->output
                                 , 'komponen' => $model->komponen, 'subkomp' => $model->subkomp, 'akun' => null])->execute();
@@ -1169,16 +1169,16 @@ class DiparealisasiController extends Controller {
             case "1":
                 $program1 = (new \yii\db\Query())
                                 ->select(['januari'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('januari');
+                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('januari');
                 $kegiatan1 = (new \yii\db\Query())
                                 ->select(['januari'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('januari');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('januari');
                 $output1 = (new \yii\db\Query())
                                 ->select(['januari'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null])->sum('januari');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('januari');
                 $komponen1 = (new \yii\db\Query())
                                 ->select(['januari'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null])->sum('januari');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->sum('januari');
                 $subkomp1 = (new \yii\db\Query())
                                 ->select(['januari'])->from('dipabulanan')
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->sum('januari');
@@ -1190,16 +1190,16 @@ class DiparealisasiController extends Controller {
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => $akun, 'uraian' => $uraian])->sum('januari');
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['januari' => $program1 - $realisasi], ['program' => $program, 'kegiatan' => null, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['januari' => $kegiatan1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['januari' => $output1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['januari' => $komponen1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => $komponen, 'subkomp' => null])->execute();
+                            , 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['januari' => $subkomp1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
                             , 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->execute();
@@ -1215,16 +1215,16 @@ class DiparealisasiController extends Controller {
             case "2":
                 $program1 = (new \yii\db\Query())
                                 ->select(['februari'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('februari');
+                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('februari');
                 $kegiatan1 = (new \yii\db\Query())
                                 ->select(['februari'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('februari');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('februari');
                 $output1 = (new \yii\db\Query())
                                 ->select(['februari'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null])->sum('februari');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('februari');
                 $komponen1 = (new \yii\db\Query())
                                 ->select(['februari'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null])->sum('februari');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->sum('februari');
                 $subkomp1 = (new \yii\db\Query())
                                 ->select(['februari'])->from('dipabulanan')
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->sum('februari');
@@ -1236,16 +1236,16 @@ class DiparealisasiController extends Controller {
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => $akun, 'uraian' => $uraian])->sum('februari');
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['februari' => $program1 - $realisasi], ['program' => $program, 'kegiatan' => null, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['februari' => $kegiatan1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['februari' => $output1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['februari' => $komponen1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => $komponen, 'subkomp' => null])->execute();
+                            , 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['februari' => $subkomp1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
                             , 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->execute();
@@ -1261,16 +1261,16 @@ class DiparealisasiController extends Controller {
             case "3":
                 $program1 = (new \yii\db\Query())
                                 ->select(['maret'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('maret');
+                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('maret');
                 $kegiatan1 = (new \yii\db\Query())
                                 ->select(['maret'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('maret');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('maret');
                 $output1 = (new \yii\db\Query())
                                 ->select(['maret'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null])->sum('maret');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('maret');
                 $komponen1 = (new \yii\db\Query())
                                 ->select(['maret'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null])->sum('maret');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->sum('maret');
                 $subkomp1 = (new \yii\db\Query())
                                 ->select(['maret'])->from('dipabulanan')
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->sum('maret');
@@ -1282,16 +1282,16 @@ class DiparealisasiController extends Controller {
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => $akun, 'uraian' => $uraian])->sum('maret');
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['maret' => $program1 - $realisasi], ['program' => $program, 'kegiatan' => null, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['maret' => $kegiatan1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['maret' => $output1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['maret' => $komponen1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => $komponen, 'subkomp' => null])->execute();
+                            , 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['maret' => $subkomp1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
                             , 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->execute();
@@ -1307,16 +1307,16 @@ class DiparealisasiController extends Controller {
             case "4":
                 $program1 = (new \yii\db\Query())
                                 ->select(['april'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('april');
+                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('april');
                 $kegiatan1 = (new \yii\db\Query())
                                 ->select(['april'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('april');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('april');
                 $output1 = (new \yii\db\Query())
                                 ->select(['april'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null])->sum('april');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('april');
                 $komponen1 = (new \yii\db\Query())
                                 ->select(['april'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null])->sum('april');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->sum('april');
                 $subkomp1 = (new \yii\db\Query())
                                 ->select(['april'])->from('dipabulanan')
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->sum('april');
@@ -1328,16 +1328,16 @@ class DiparealisasiController extends Controller {
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => $akun, 'uraian' => $uraian])->sum('april');
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['april' => $program1 - $realisasi], ['program' => $program, 'kegiatan' => null, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['april' => $kegiatan1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['april' => $output1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['april' => $komponen1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => $komponen, 'subkomp' => null])->execute();
+                            , 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['april' => $subkomp1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
                             , 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->execute();
@@ -1353,16 +1353,16 @@ class DiparealisasiController extends Controller {
             case "5":
                 $program1 = (new \yii\db\Query())
                                 ->select(['mei'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('mei');
+                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('mei');
                 $kegiatan1 = (new \yii\db\Query())
                                 ->select(['mei'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('mei');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('mei');
                 $output1 = (new \yii\db\Query())
                                 ->select(['mei'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null])->sum('mei');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('mei');
                 $komponen1 = (new \yii\db\Query())
                                 ->select(['mei'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null])->sum('mei');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->sum('mei');
                 $subkomp1 = (new \yii\db\Query())
                                 ->select(['mei'])->from('dipabulanan')
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->sum('mei');
@@ -1374,16 +1374,16 @@ class DiparealisasiController extends Controller {
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => $akun, 'uraian' => $uraian])->sum('mei');
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['mei' => $program1 - $realisasi], ['program' => $program, 'kegiatan' => null, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['mei' => $kegiatan1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['mei' => $output1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['mei' => $komponen1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => $komponen, 'subkomp' => null])->execute();
+                            , 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['mei' => $subkomp1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
                             , 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->execute();
@@ -1399,16 +1399,16 @@ class DiparealisasiController extends Controller {
             case "6":
                 $program1 = (new \yii\db\Query())
                                 ->select(['juni'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('juni');
+                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juni');
                 $kegiatan1 = (new \yii\db\Query())
                                 ->select(['juni'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('juni');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juni');
                 $output1 = (new \yii\db\Query())
                                 ->select(['juni'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null])->sum('juni');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juni');
                 $komponen1 = (new \yii\db\Query())
                                 ->select(['juni'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null])->sum('juni');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->sum('juni');
                 $subkomp1 = (new \yii\db\Query())
                                 ->select(['juni'])->from('dipabulanan')
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->sum('juni');
@@ -1420,16 +1420,16 @@ class DiparealisasiController extends Controller {
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => $akun, 'uraian' => $uraian])->sum('juni');
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['juni' => $program1 - $realisasi], ['program' => $program, 'kegiatan' => null, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['juni' => $kegiatan1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['juni' => $output1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['juni' => $komponen1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => $komponen, 'subkomp' => null])->execute();
+                            , 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['juni' => $subkomp1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
                             , 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->execute();
@@ -1445,16 +1445,16 @@ class DiparealisasiController extends Controller {
             case "7":
                 $program1 = (new \yii\db\Query())
                                 ->select(['juli'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('juli');
+                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juli');
                 $kegiatan1 = (new \yii\db\Query())
                                 ->select(['juli'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('juli');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juli');
                 $output1 = (new \yii\db\Query())
                                 ->select(['juli'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null])->sum('juli');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juli');
                 $komponen1 = (new \yii\db\Query())
                                 ->select(['juli'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null])->sum('juli');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->sum('juli');
                 $subkomp1 = (new \yii\db\Query())
                                 ->select(['juli'])->from('dipabulanan')
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->sum('juli');
@@ -1466,16 +1466,16 @@ class DiparealisasiController extends Controller {
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => $akun, 'uraian' => $uraian])->sum('juli');
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['juli' => $program1 - $realisasi], ['program' => $program, 'kegiatan' => null, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['juli' => $kegiatan1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['juli' => $output1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['juli' => $komponen1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => $komponen, 'subkomp' => null])->execute();
+                            , 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['juli' => $subkomp1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
                             , 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->execute();
@@ -1491,16 +1491,16 @@ class DiparealisasiController extends Controller {
             case "8":
                 $program1 = (new \yii\db\Query())
                                 ->select(['agustus'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('agustus');
+                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('agustus');
                 $kegiatan1 = (new \yii\db\Query())
                                 ->select(['agustus'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('agustus');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('agustus');
                 $output1 = (new \yii\db\Query())
                                 ->select(['agustus'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null])->sum('agustus');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('agustus');
                 $komponen1 = (new \yii\db\Query())
                                 ->select(['agustus'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null])->sum('agustus');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->sum('agustus');
                 $subkomp1 = (new \yii\db\Query())
                                 ->select(['agustus'])->from('dipabulanan')
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->sum('agustus');
@@ -1512,16 +1512,16 @@ class DiparealisasiController extends Controller {
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => $akun, 'uraian' => $uraian])->sum('agustus');
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['agustus' => $program1 - $realisasi], ['program' => $program, 'kegiatan' => null, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['agustus' => $kegiatan1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['agustus' => $output1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['agustus' => $komponen1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => $komponen, 'subkomp' => null])->execute();
+                            , 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['agustus' => $subkomp1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
                             , 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->execute();
@@ -1537,16 +1537,16 @@ class DiparealisasiController extends Controller {
             case "9":
                 $program1 = (new \yii\db\Query())
                                 ->select(['september'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('september');
+                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('september');
                 $kegiatan1 = (new \yii\db\Query())
                                 ->select(['september'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('september');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('september');
                 $output1 = (new \yii\db\Query())
                                 ->select(['september'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null])->sum('september');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('september');
                 $komponen1 = (new \yii\db\Query())
                                 ->select(['september'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null])->sum('september');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->sum('september');
                 $subkomp1 = (new \yii\db\Query())
                                 ->select(['september'])->from('dipabulanan')
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->sum('september');
@@ -1558,16 +1558,16 @@ class DiparealisasiController extends Controller {
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => $akun, 'uraian' => $uraian])->sum('september');
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['september' => $program1 - $realisasi], ['program' => $program, 'kegiatan' => null, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['september' => $kegiatan1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['september' => $output1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['september' => $komponen1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => $komponen, 'subkomp' => null])->execute();
+                            , 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['september' => $subkomp1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
                             , 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->execute();
@@ -1583,16 +1583,16 @@ class DiparealisasiController extends Controller {
             case "10":
                 $program1 = (new \yii\db\Query())
                                 ->select(['oktober'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('oktober');
+                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('oktober');
                 $kegiatan1 = (new \yii\db\Query())
                                 ->select(['oktober'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('oktober');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('oktober');
                 $output1 = (new \yii\db\Query())
                                 ->select(['oktober'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null])->sum('oktober');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('oktober');
                 $komponen1 = (new \yii\db\Query())
                                 ->select(['oktober'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null])->sum('oktober');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->sum('oktober');
                 $subkomp1 = (new \yii\db\Query())
                                 ->select(['oktober'])->from('dipabulanan')
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->sum('oktober');
@@ -1604,16 +1604,16 @@ class DiparealisasiController extends Controller {
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => $akun, 'uraian' => $uraian])->sum('oktober');
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['oktober' => $program1 - $realisasi], ['program' => $program, 'kegiatan' => null, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['oktober' => $kegiatan1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['oktober' => $output1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['oktober' => $komponen1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => $komponen, 'subkomp' => null])->execute();
+                            , 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['oktober' => $subkomp1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
                             , 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->execute();
@@ -1629,16 +1629,16 @@ class DiparealisasiController extends Controller {
             case "11":
                 $program1 = (new \yii\db\Query())
                                 ->select(['november'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('november');
+                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('november');
                 $kegiatan1 = (new \yii\db\Query())
                                 ->select(['november'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('november');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('november');
                 $output1 = (new \yii\db\Query())
                                 ->select(['november'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null])->sum('november');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('november');
                 $komponen1 = (new \yii\db\Query())
                                 ->select(['november'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null])->sum('november');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->sum('november');
                 $subkomp1 = (new \yii\db\Query())
                                 ->select(['november'])->from('dipabulanan')
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->sum('november');
@@ -1650,16 +1650,16 @@ class DiparealisasiController extends Controller {
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => $akun, 'uraian' => $uraian])->sum('november');
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['november' => $program1 - $realisasi], ['program' => $program, 'kegiatan' => null, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['november' => $kegiatan1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['november' => $output1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['november' => $komponen1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => $komponen, 'subkomp' => null])->execute();
+                            , 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['november' => $subkomp1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
                             , 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->execute();
@@ -1675,16 +1675,16 @@ class DiparealisasiController extends Controller {
             case "12":
                 $program1 = (new \yii\db\Query())
                                 ->select(['desember'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('desember');
+                                ->where(['program' => $program, 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('desember');
                 $kegiatan1 = (new \yii\db\Query())
                                 ->select(['desember'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null])->sum('desember');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('desember');
                 $output1 = (new \yii\db\Query())
                                 ->select(['desember'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null])->sum('desember');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('desember');
                 $komponen1 = (new \yii\db\Query())
                                 ->select(['desember'])->from('dipabulanan')
-                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null])->sum('desember');
+                                ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->sum('desember');
                 $subkomp1 = (new \yii\db\Query())
                                 ->select(['desember'])->from('dipabulanan')
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->sum('desember');
@@ -1696,16 +1696,16 @@ class DiparealisasiController extends Controller {
                                 ->where(['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output, 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => $akun, 'uraian' => $uraian])->sum('desember');
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['desember' => $program1 - $realisasi], ['program' => $program, 'kegiatan' => null, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['desember' => $kegiatan1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => null
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['desember' => $output1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => null, 'subkomp' => null])->execute();
+                            , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['desember' => $komponen1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
-                            , 'komponen' => $komponen, 'subkomp' => null])->execute();
+                            , 'komponen' => $komponen, 'subkomp' => null, 'akun' => null])->execute();
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['desember' => $subkomp1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
                             , 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => null])->execute();
