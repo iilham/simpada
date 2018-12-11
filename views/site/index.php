@@ -7,40 +7,17 @@ use miloschuman\highcharts\Highcharts;
 use miloschuman\highcharts\HighchartsAsset;
 HighchartsAsset::register($this)->withScripts(['highstock', 'modules/exporting', 'modules/drilldown']);
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Dipa */
 
 $this->title = 'Monitoring';
 $this->params['breadcrumbs'][] = ['label' => 'Dipa', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-// echo $tahun;
-// $tahun = DipaMaster::find()
-//          ->select (['tahun' => SORT_DESC]);
-// echo $tahun;
-// foreach ($tahun as $thn) {
-// 	echo $thn[tahun];
-// }
-// print_r ($max);
-// print_r($tahun[1][tahun]);
-// die();
-// $tahun = ['2017', '2018', '2019'];
-// $max = max($tahun);
-// echo $max;
-// $tahun = new DipaMaster(); 
-// $apa = $tahun->tahun;
-// print_r($apa);
-// die();
 
 $tahun = date("Y");
 
 $realis = (new \yii\db\Query())
         ->select(['realisasi', 'bulan_id'])
         ->from('diparealisasi')
-//        ->where([
-//            'bulan_id' => 1,
-//        ])
         ->all();
-//print_r($realis);
 $jan = [0];
 $feb = [0];
 $mar = [0];
@@ -122,6 +99,11 @@ echo Highcharts::widget([
         ],
         'yAxis' => [
             'title' => ['text' => 'Realisasi']
+        ],
+        'plotOptions'=>[
+          'line' =>[
+              'dataLabels'=> [ 'enabled'=>TRUE
+          ]]  
         ],
         'tooltip' => array(
             'formatter' => 'js:function(){ return this.series.name; }'
