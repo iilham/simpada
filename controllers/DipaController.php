@@ -36,15 +36,6 @@ class DipaController extends Controller {
         ]);
     }
 
-    public function actionIndex1() {
-        $searchModel = new DipaSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        return $this->render('index_1', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
-        ]);
-    }
-
     public function actionView($id) {
         return $this->render('view', [
                     'model' => $this->findModel($id),
