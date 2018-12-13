@@ -12,12 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="dipa-create">
-
-   
-
-    <?php $form = ActiveForm::begin();
-    ?>
-
+    <?php $form = ActiveForm::begin();?>
     <div class="panel panel-default">
         <div class="panel-heading"><i class="fa fa-cog fa-spin fa-2x fa-fw"></i>Silahkan upload file RKAKL di sini!</div>
         <div class="panel-body">

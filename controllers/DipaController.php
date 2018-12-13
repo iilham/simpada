@@ -71,7 +71,8 @@ class DipaController extends Controller {
                     'model' => $this->findModel($id),
         ]);
     }
-//UPDATE your_table SET column_that_you_want_to_change= REGEXP_REPLACE(column_that_you_want_to_change, '[[:space:]]+', ' ');
+
+//    UPDATE your_table SET column_that_you_want_to_change= REGEXP_REPLACE(column_that_you_want_to_change, '[[:space:]]+', ' ');
 //    UPDATE diparealisasi SET uraian= REGEXP_REPLACE(uraian, '[[:space:]]+', ' ');
     public function actionCreate() {
         $model = new Dipa();
@@ -100,11 +101,7 @@ class DipaController extends Controller {
                     $sheet = $objPHPExcel->getSheet(0);
                     $baris = $sheet->getHighestRow();
                     $kolom = $sheet->getHighestColumn();
-//                    $baseRow = 2;
-//                    $baris = 1;
-//                    while (!empty($sheetData[$baseRow]['B'])) {
                     $tmp = array();
-//                    $n = array();
                     $lastkode9 = '';
                     $lastkode8 = '';
                     $lastkode6 = '';
@@ -130,7 +127,7 @@ class DipaController extends Controller {
                                 $program->subkomp = null;
                                 $program->akun = null;
                                 $program->baris = $key;
-                                $program->uraian = preg_replace('/\s+/', ' ',$row['B']);;
+                                $program->uraian = preg_replace('/\s+/', ' ', $row['B']);
                                 $program->vol = $row['C'];
                                 $program->sat = $row['D'];
                                 $program->hargasat = $row['E'];
@@ -140,7 +137,7 @@ class DipaController extends Controller {
                                 $program->save();
 
                                 $tmp[$kode]['kode'] = $kode . '-0000-00000000-000-0-000000-0';
-                                $tmp[$kode]['uraian'] = preg_replace('/\s+/', ' ',$row['B']);;
+                                $tmp[$kode]['uraian'] = preg_replace('/\s+/', ' ', $row['B']);
                                 $tmp[$kode]['vol'] = $row['C'];
                                 $tmp[$kode]['satuan'] = $row['D'];
                                 $tmp[$kode]['hrgsatuan'] = $row['E'];
@@ -161,7 +158,7 @@ class DipaController extends Controller {
                                 $kegiatan->subkomp = null;
                                 $kegiatan->akun = null;
                                 $kegiatan->baris = $key;
-                                $kegiatan->uraian = preg_replace('/\s+/', ' ',$row['B']);;
+                                $kegiatan->uraian = preg_replace('/\s+/', ' ', $row['B']);
                                 $kegiatan->vol = $row['C'];
                                 $kegiatan->sat = $row['D'];
                                 $kegiatan->hargasat = $row['E'];
@@ -170,7 +167,7 @@ class DipaController extends Controller {
                                 $kegiatan->dipamaster_id = $key;
                                 $kegiatan->save();
                                 $tmp[$lastkode9][$kode]['kode'] = $lastkode9 . '-' . $kode . '-00000000-000-0-000000-0';
-                                $tmp[$lastkode9][$kode]['uraian'] = preg_replace('/\s+/', ' ',$row['B']);;
+                                $tmp[$lastkode9][$kode]['uraian'] = preg_replace('/\s+/', ' ', $row['B']);
                                 $tmp[$lastkode9][$kode]['vol'] = $row['C'];
                                 $tmp[$lastkode9][$kode]['satuan'] = $row['D'];
                                 $tmp[$lastkode9][$kode]['hrgsatuan'] = $row['E'];
@@ -191,7 +188,7 @@ class DipaController extends Controller {
                                 $output->subkomp = null;
                                 $output->akun = null;
                                 $output->baris = $key;
-                                $output->uraian = preg_replace('/\s+/', ' ',$row['B']);;
+                                $output->uraian = preg_replace('/\s+/', ' ', $row['B']);
                                 $output->vol = $row['C'];
                                 $output->sat = $row['D'];
                                 $output->hargasat = $row['E'];
@@ -220,7 +217,7 @@ class DipaController extends Controller {
                                 $komponen->subkomp = null;
                                 $komponen->akun = null;
                                 $komponen->baris = $key;
-                                $komponen->uraian = preg_replace('/\s+/', ' ',$row['B']);;
+                                $komponen->uraian = preg_replace('/\s+/', ' ', $row['B']);
                                 $komponen->vol = $row['C'];
                                 $komponen->sat = $row['D'];
                                 $komponen->hargasat = $row['E'];
@@ -229,7 +226,7 @@ class DipaController extends Controller {
                                 $komponen->dipamaster_id = $key;
                                 $komponen->save();
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$kode]['kode'] = $lastkode9 . '-' . $lastkode4 . '-' . $lastkode8 . '-' . $kode . '-0-000000-0';
-                                $tmp[$lastkode9][$lastkode4][$lastkode8][$kode]['uraian'] = preg_replace('/\s+/', ' ',$row['B']);;
+                                $tmp[$lastkode9][$lastkode4][$lastkode8][$kode]['uraian'] = preg_replace('/\s+/', ' ', $row['B']);
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$kode]['vol'] = $row['C'];
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$kode]['satuan'] = $row['D'];
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$kode]['hrgsatuan'] = $row['E'];
@@ -252,7 +249,7 @@ class DipaController extends Controller {
                                 $subkomp->subkomp = $kode;
                                 $subkomp->akun = null;
                                 $subkomp->baris = $key;
-                                $subkomp->uraian = preg_replace('/\s+/', ' ',$row['B']);;
+                                $subkomp->uraian = preg_replace('/\s+/', ' ', $row['B']);
                                 $subkomp->vol = $row['C'];
                                 $subkomp->sat = $row['D'];
                                 $subkomp->hargasat = $row['E'];
@@ -261,7 +258,7 @@ class DipaController extends Controller {
                                 $subkomp->dipamaster_id = $key;
                                 $subkomp->save();
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$kode]['kode'] = $lastkode9 . '-' . $lastkode4 . '-' . $lastkode8 . '-' . $lastkode3 . '-' . $kode . '-000000-0';
-                                $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$kode]['uraian'] = preg_replace('/\s+/', ' ',$row['B']);;
+                                $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$kode]['uraian'] = preg_replace('/\s+/', ' ', $row['B']);
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$kode]['vol'] = $row['C'];
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$kode]['satuan'] = $row['D'];
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$kode]['hrgsatuan'] = $row['E'];
@@ -282,7 +279,7 @@ class DipaController extends Controller {
                                 $akun->subkomp = $lastkode1;
                                 $akun->akun = $kode;
                                 $akun->baris = $key;
-                                $akun->uraian = preg_replace('/\s+/', ' ',$row['B']);;
+                                $akun->uraian = preg_replace('/\s+/', ' ', $row['B']);
                                 $akun->vol = $row['C'];
                                 $akun->sat = $row['D'];
                                 $akun->hargasat = $row['E'];
@@ -292,7 +289,7 @@ class DipaController extends Controller {
                                 $akun->save();
 
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$lastkode1][$kode]['kode'] = $lastkode9 . '-' . $lastkode4 . '-' . $lastkode8 . '-' . $lastkode3 . '-' . $lastkode1 . '-' . $kode . '-0';
-                                $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$lastkode1][$kode]['uraian'] = preg_replace('/\s+/', ' ',$row['B']);;
+                                $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$lastkode1][$kode]['uraian'] = preg_replace('/\s+/', ' ', $row['B']);
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$lastkode1][$kode]['vol'] = $row['C'];
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$lastkode1][$kode]['satuan'] = $row['D'];
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$lastkode1][$kode]['hrgsatuan'] = $row['E'];
@@ -313,7 +310,7 @@ class DipaController extends Controller {
                                 $detil->subkomp = $lastkode1;
                                 $detil->akun = $lastkode6;
                                 $detil->baris = $key;
-                                $detil->uraian = preg_replace('/\s+/', ' ',$row['B']);;
+                                $detil->uraian = preg_replace('/\s+/', ' ', $row['B']);
                                 $detil->vol = $row['C'];
                                 $detil->sat = $row['D'];
                                 $detil->hargasat = $row['E'];
@@ -322,7 +319,7 @@ class DipaController extends Controller {
                                 $detil->dipamaster_id = $key;
                                 $detil->save();
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$lastkode1][$lastkode6][$k]['kode'] = $lastkode9 . '-' . $lastkode4 . '-' . $lastkode8 . '-' . $lastkode3 . '-' . $lastkode1 . '-' . $lastkode6 . '-' . $k;
-                                $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$lastkode1][$lastkode6][$k]['uraian'] = preg_replace('/\s+/', ' ',$row['B']);;
+                                $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$lastkode1][$lastkode6][$k]['uraian'] = preg_replace('/\s+/', ' ', $row['B']);
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$lastkode1][$lastkode6][$k]['vol'] = $row['C'];
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$lastkode1][$lastkode6][$k]['satuan'] = $row['D'];
                                 $tmp[$lastkode9][$lastkode4][$lastkode8][$lastkode3][$lastkode1][$lastkode6][$k]['hrgsatuan'] = $row['E'];
@@ -339,7 +336,6 @@ class DipaController extends Controller {
                     Yii::$app->getSession()->setFlash('error', 'Error');
                 }
             }
-
             $model2->save(false);
             if ($model2->file) {
                 $uploadPath = "uploads/";
