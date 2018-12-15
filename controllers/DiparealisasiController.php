@@ -5,7 +5,6 @@ namespace app\controllers;
 use Yii;
 use app\models\Diparealisasi;
 use app\models\DiparealisasiSearch;
-use app\models\DipaSearch;
 use app\models\DipabulananSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -30,556 +29,552 @@ class DiparealisasiController extends Controller {
         ];
     }
 
+    public function actionSynchron() {
+        $sel = 'SELECT `bulan_id`, `program`, `kegiatan`, `output`, `suboutput`, `komponen`, `subkomp`, `akun`, `uraian`, `realisasi` FROM `diparealisasi`';
+        $ambil = \Yii::$app->db->createCommand($sel)->queryAll();
+        for ($i = 0; $i <= count($ambil); $i++) {
+            $bulan = $ambil[$i]['bulan_id'];
+            switch ($bulan) {
+                case "1":
+                    $program1 = (new \yii\db\Query())
+                                    ->select(['januari'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('januari');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $kegiatan1 = (new \yii\db\Query())
+                                    ->select(['januari'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('januari');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $output1 = (new \yii\db\Query())
+                                    ->select(['januari'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('januari');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $komponen1 = (new \yii\db\Query())
+                                    ->select(['januari'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('januari');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
+                    $subkomp1 = (new \yii\db\Query())
+                                    ->select(['januari'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('januari');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
+                    $akun1 = (new \yii\db\Query())
+                                    ->select(['januari'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('januari');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
+                    $detil1 = (new \yii\db\Query())
+                                    ->select(['januari'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('januari');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
+                    break;
+                case "2":
+                    $program1 = (new \yii\db\Query())
+                                    ->select(['februari'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('februari');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $kegiatan1 = (new \yii\db\Query())
+                                    ->select(['februari'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('februari');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $output1 = (new \yii\db\Query())
+                                    ->select(['februari'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('februari');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $komponen1 = (new \yii\db\Query())
+                                    ->select(['februari'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('februari');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
+                    $subkomp1 = (new \yii\db\Query())
+                                    ->select(['februari'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('februari');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
+                    $akun1 = (new \yii\db\Query())
+                                    ->select(['februari'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('februari');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
+                    $detil1 = (new \yii\db\Query())
+                                    ->select(['februari'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('februari');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
+                    break;
+                case "3":
+                    $program1 = (new \yii\db\Query())
+                                    ->select(['maret'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('maret');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $kegiatan1 = (new \yii\db\Query())
+                                    ->select(['maret'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('maret');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $output1 = (new \yii\db\Query())
+                                    ->select(['maret'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('maret');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $komponen1 = (new \yii\db\Query())
+                                    ->select(['maret'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('maret');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
+                    $subkomp1 = (new \yii\db\Query())
+                                    ->select(['maret'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('maret');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
+                    $akun1 = (new \yii\db\Query())
+                                    ->select(['maret'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('maret');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
+                    $detil1 = (new \yii\db\Query())
+                                    ->select(['maret'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('maret');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
+                    break;
+                case "4":
+                    $program1 = (new \yii\db\Query())
+                                    ->select(['april'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('april');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $kegiatan1 = (new \yii\db\Query())
+                                    ->select(['april'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('april');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $output1 = (new \yii\db\Query())
+                                    ->select(['april'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('april');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $komponen1 = (new \yii\db\Query())
+                                    ->select(['april'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('april');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
+                    $subkomp1 = (new \yii\db\Query())
+                                    ->select(['april'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('april');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
+                    $akun1 = (new \yii\db\Query())
+                                    ->select(['april'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('april');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
+                    $detil1 = (new \yii\db\Query())
+                                    ->select(['april'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('april');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
+                    break;
+                case "5":
+                    $program1 = (new \yii\db\Query())
+                                    ->select(['mei'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('mei');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $kegiatan1 = (new \yii\db\Query())
+                                    ->select(['mei'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('mei');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $output1 = (new \yii\db\Query())
+                                    ->select(['mei'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('mei');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $komponen1 = (new \yii\db\Query())
+                                    ->select(['mei'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('mei');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
+                    $subkomp1 = (new \yii\db\Query())
+                                    ->select(['mei'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('mei');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
+                    $akun1 = (new \yii\db\Query())
+                                    ->select(['mei'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('mei');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
+                    $detil1 = (new \yii\db\Query())
+                                    ->select(['mei'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('mei');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
+                    break;
+                case "6":
+                    $program1 = (new \yii\db\Query())
+                                    ->select(['juni'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juni');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $kegiatan1 = (new \yii\db\Query())
+                                    ->select(['juni'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juni');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $output1 = (new \yii\db\Query())
+                                    ->select(['juni'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juni');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $komponen1 = (new \yii\db\Query())
+                                    ->select(['juni'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('juni');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
+                    $subkomp1 = (new \yii\db\Query())
+                                    ->select(['juni'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('juni');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
+                    $akun1 = (new \yii\db\Query())
+                                    ->select(['juni'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('juni');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
+                    $detil1 = (new \yii\db\Query())
+                                    ->select(['juni'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('juni');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
+                    break;
+                case "7":
+                    $program1 = (new \yii\db\Query())
+                                    ->select(['juli'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juli');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $kegiatan1 = (new \yii\db\Query())
+                                    ->select(['juli'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juli');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $output1 = (new \yii\db\Query())
+                                    ->select(['juli'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juli');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $komponen1 = (new \yii\db\Query())
+                                    ->select(['juli'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('juli');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
+                    $subkomp1 = (new \yii\db\Query())
+                                    ->select(['juli'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('juli');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
+                    $akun1 = (new \yii\db\Query())
+                                    ->select(['juli'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('juli');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
+                    $detil1 = (new \yii\db\Query())
+                                    ->select(['juli'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('juli');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
+                    break;
+                case "8":
+                    $program1 = (new \yii\db\Query())
+                                    ->select(['agustus'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('agustus');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $kegiatan1 = (new \yii\db\Query())
+                                    ->select(['agustus'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('agustus');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $output1 = (new \yii\db\Query())
+                                    ->select(['agustus'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('agustus');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $komponen1 = (new \yii\db\Query())
+                                    ->select(['agustus'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('agustus');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
+                    $subkomp1 = (new \yii\db\Query())
+                                    ->select(['agustus'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('agustus');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
+                    $akun1 = (new \yii\db\Query())
+                                    ->select(['agustus'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('agustus');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
+                    $detil1 = (new \yii\db\Query())
+                                    ->select(['agustus'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('agustus');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
+                    break;
+                case "9":
+                    $program1 = (new \yii\db\Query())
+                                    ->select(['september'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('september');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $kegiatan1 = (new \yii\db\Query())
+                                    ->select(['september'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('september');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $output1 = (new \yii\db\Query())
+                                    ->select(['september'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('september');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $komponen1 = (new \yii\db\Query())
+                                    ->select(['september'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('september');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
+                    $subkomp1 = (new \yii\db\Query())
+                                    ->select(['september'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('september');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
+                    $akun1 = (new \yii\db\Query())
+                                    ->select(['september'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('september');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
+                    $detil1 = (new \yii\db\Query())
+                                    ->select(['september'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('september');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
+                    break;
+                case "10":
+                    $program1 = (new \yii\db\Query())
+                                    ->select(['oktober'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('oktober');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $kegiatan1 = (new \yii\db\Query())
+                                    ->select(['oktober'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('oktober');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $output1 = (new \yii\db\Query())
+                                    ->select(['oktober'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('oktober');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $komponen1 = (new \yii\db\Query())
+                                    ->select(['oktober'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('oktober');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
+                    $subkomp1 = (new \yii\db\Query())
+                                    ->select(['oktober'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('oktober');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
+                    $akun1 = (new \yii\db\Query())
+                                    ->select(['oktober'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('oktober');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
+                    $detil1 = (new \yii\db\Query())
+                                    ->select(['oktober'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('oktober');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
+                    break;
+                case "11":
+                    $program1 = (new \yii\db\Query())
+                                    ->select(['november'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('november');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $kegiatan1 = (new \yii\db\Query())
+                                    ->select(['november'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('november');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $output1 = (new \yii\db\Query())
+                                    ->select(['november'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('november');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $komponen1 = (new \yii\db\Query())
+                                    ->select(['november'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('november');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
+                    $subkomp1 = (new \yii\db\Query())
+                                    ->select(['november'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('november');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
+                    $akun1 = (new \yii\db\Query())
+                                    ->select(['november'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('november');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
+                    $detil1 = (new \yii\db\Query())
+                                    ->select(['november'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('november');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
+                    break;
+                case "12":
+                    $program1 = (new \yii\db\Query())
+                                    ->select(['desember'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('desember');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $kegiatan1 = (new \yii\db\Query())
+                                    ->select(['desember'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('desember');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $output1 = (new \yii\db\Query())
+                                    ->select(['desember'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('desember');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
+                    $komponen1 = (new \yii\db\Query())
+                                    ->select(['desember'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('desember');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
+                    $subkomp1 = (new \yii\db\Query())
+                                    ->select(['desember'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('desember');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
+                    $akun1 = (new \yii\db\Query())
+                                    ->select(['desember'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('desember');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
+                    $detil1 = (new \yii\db\Query())
+                                    ->select(['desember'])->from('dipabulanan')
+                                    ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('desember');
+                    Yii::$app->db->createCommand()
+                            ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
+                                , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
+                    break;
+            }
+            $updt = 'UPDATE `diparealisasi` SET `keterangan`= 1 WHERE 1';
+            \Yii::$app->db->createCommand($updt)->execute();
+        }
+    }
     public function actionIndex() {
         $searchModel = new DipabulananSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $sql = 'SELECT `keterangan` FROM `diparealisasi`';
-        $s = \Yii::$app->db->createCommand($sql)->queryScalar();
-        if ($s == 0) {
-            $sel = 'SELECT `bulan_id`, `program`, `kegiatan`, `output`, `suboutput`, `komponen`, `subkomp`, `akun`, `uraian`, `realisasi` FROM `diparealisasi`';
-            $ambil = \Yii::$app->db->createCommand($sel)->queryAll();
-            for ($i = 0; $i <= count($ambil); $i++) {
-                $bulan = $ambil[$i]['bulan_id'];
-                switch ($bulan) {
-                    case "1":
-                        $program1 = (new \yii\db\Query())
-                                        ->select(['januari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('januari');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $kegiatan1 = (new \yii\db\Query())
-                                        ->select(['januari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('januari');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $output1 = (new \yii\db\Query())
-                                        ->select(['januari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('januari');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $komponen1 = (new \yii\db\Query())
-                                        ->select(['januari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('januari');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
-                        $subkomp1 = (new \yii\db\Query())
-                                        ->select(['januari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('januari');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
-                        $akun1 = (new \yii\db\Query())
-                                        ->select(['januari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('januari');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
-                        $detil1 = (new \yii\db\Query())
-                                        ->select(['januari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('januari');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['januari' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
-                        break;
-                    case "2":
-                        $program1 = (new \yii\db\Query())
-                                        ->select(['februari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('februari');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $kegiatan1 = (new \yii\db\Query())
-                                        ->select(['februari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('februari');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $output1 = (new \yii\db\Query())
-                                        ->select(['februari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('februari');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $komponen1 = (new \yii\db\Query())
-                                        ->select(['februari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('februari');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
-                        $subkomp1 = (new \yii\db\Query())
-                                        ->select(['februari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('februari');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
-                        $akun1 = (new \yii\db\Query())
-                                        ->select(['februari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('februari');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
-                        $detil1 = (new \yii\db\Query())
-                                        ->select(['februari'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('februari');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['februari' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
-                        break;
-                    case "3":
-                        $program1 = (new \yii\db\Query())
-                                        ->select(['maret'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('maret');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $kegiatan1 = (new \yii\db\Query())
-                                        ->select(['maret'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('maret');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $output1 = (new \yii\db\Query())
-                                        ->select(['maret'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('maret');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $komponen1 = (new \yii\db\Query())
-                                        ->select(['maret'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('maret');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
-                        $subkomp1 = (new \yii\db\Query())
-                                        ->select(['maret'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('maret');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
-                        $akun1 = (new \yii\db\Query())
-                                        ->select(['maret'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('maret');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
-                        $detil1 = (new \yii\db\Query())
-                                        ->select(['maret'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('maret');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['maret' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
-                        break;
-                    case "4":
-                        $program1 = (new \yii\db\Query())
-                                        ->select(['april'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('april');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $kegiatan1 = (new \yii\db\Query())
-                                        ->select(['april'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('april');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $output1 = (new \yii\db\Query())
-                                        ->select(['april'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('april');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $komponen1 = (new \yii\db\Query())
-                                        ->select(['april'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('april');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
-                        $subkomp1 = (new \yii\db\Query())
-                                        ->select(['april'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('april');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
-                        $akun1 = (new \yii\db\Query())
-                                        ->select(['april'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('april');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
-                        $detil1 = (new \yii\db\Query())
-                                        ->select(['april'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('april');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['april' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
-                        break;
-                    case "5":
-                        $program1 = (new \yii\db\Query())
-                                        ->select(['mei'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('mei');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $kegiatan1 = (new \yii\db\Query())
-                                        ->select(['mei'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('mei');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $output1 = (new \yii\db\Query())
-                                        ->select(['mei'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('mei');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $komponen1 = (new \yii\db\Query())
-                                        ->select(['mei'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('mei');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
-                        $subkomp1 = (new \yii\db\Query())
-                                        ->select(['mei'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('mei');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
-                        $akun1 = (new \yii\db\Query())
-                                        ->select(['mei'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('mei');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
-                        $detil1 = (new \yii\db\Query())
-                                        ->select(['mei'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('mei');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['mei' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
-                        break;
-                    case "6":
-                        $program1 = (new \yii\db\Query())
-                                        ->select(['juni'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juni');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $kegiatan1 = (new \yii\db\Query())
-                                        ->select(['juni'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juni');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $output1 = (new \yii\db\Query())
-                                        ->select(['juni'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juni');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $komponen1 = (new \yii\db\Query())
-                                        ->select(['juni'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('juni');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
-                        $subkomp1 = (new \yii\db\Query())
-                                        ->select(['juni'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('juni');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
-                        $akun1 = (new \yii\db\Query())
-                                        ->select(['juni'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('juni');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
-                        $detil1 = (new \yii\db\Query())
-                                        ->select(['juni'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('juni');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['juni' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
-                        break;
-                    case "7":
-                        $program1 = (new \yii\db\Query())
-                                        ->select(['juli'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juli');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $kegiatan1 = (new \yii\db\Query())
-                                        ->select(['juli'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juli');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $output1 = (new \yii\db\Query())
-                                        ->select(['juli'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('juli');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $komponen1 = (new \yii\db\Query())
-                                        ->select(['juli'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('juli');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
-                        $subkomp1 = (new \yii\db\Query())
-                                        ->select(['juli'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('juli');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
-                        $akun1 = (new \yii\db\Query())
-                                        ->select(['juli'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('juli');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
-                        $detil1 = (new \yii\db\Query())
-                                        ->select(['juli'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('juli');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['juli' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
-                        break;
-                    case "8":
-                        $program1 = (new \yii\db\Query())
-                                        ->select(['agustus'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('agustus');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $kegiatan1 = (new \yii\db\Query())
-                                        ->select(['agustus'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('agustus');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $output1 = (new \yii\db\Query())
-                                        ->select(['agustus'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('agustus');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $komponen1 = (new \yii\db\Query())
-                                        ->select(['agustus'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('agustus');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
-                        $subkomp1 = (new \yii\db\Query())
-                                        ->select(['agustus'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('agustus');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
-                        $akun1 = (new \yii\db\Query())
-                                        ->select(['agustus'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('agustus');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
-                        $detil1 = (new \yii\db\Query())
-                                        ->select(['agustus'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('agustus');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['agustus' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
-                        break;
-                    case "9":
-                        $program1 = (new \yii\db\Query())
-                                        ->select(['september'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('september');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $kegiatan1 = (new \yii\db\Query())
-                                        ->select(['september'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('september');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $output1 = (new \yii\db\Query())
-                                        ->select(['september'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('september');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $komponen1 = (new \yii\db\Query())
-                                        ->select(['september'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('september');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
-                        $subkomp1 = (new \yii\db\Query())
-                                        ->select(['september'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('september');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
-                        $akun1 = (new \yii\db\Query())
-                                        ->select(['september'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('september');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
-                        $detil1 = (new \yii\db\Query())
-                                        ->select(['september'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('september');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['september' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
-                        break;
-                    case "10":
-                        $program1 = (new \yii\db\Query())
-                                        ->select(['oktober'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('oktober');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $kegiatan1 = (new \yii\db\Query())
-                                        ->select(['oktober'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('oktober');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $output1 = (new \yii\db\Query())
-                                        ->select(['oktober'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('oktober');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $komponen1 = (new \yii\db\Query())
-                                        ->select(['oktober'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('oktober');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
-                        $subkomp1 = (new \yii\db\Query())
-                                        ->select(['oktober'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('oktober');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
-                        $akun1 = (new \yii\db\Query())
-                                        ->select(['oktober'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('oktober');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
-                        $detil1 = (new \yii\db\Query())
-                                        ->select(['oktober'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('oktober');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['oktober' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
-                        break;
-                    case "11":
-                        $program1 = (new \yii\db\Query())
-                                        ->select(['november'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('november');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $kegiatan1 = (new \yii\db\Query())
-                                        ->select(['november'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('november');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $output1 = (new \yii\db\Query())
-                                        ->select(['november'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('november');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $komponen1 = (new \yii\db\Query())
-                                        ->select(['november'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('november');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
-                        $subkomp1 = (new \yii\db\Query())
-                                        ->select(['november'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('november');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
-                        $akun1 = (new \yii\db\Query())
-                                        ->select(['november'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('november');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
-                        $detil1 = (new \yii\db\Query())
-                                        ->select(['november'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('november');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['november' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
-                        break;
-                    case "12":
-                        $program1 = (new \yii\db\Query())
-                                        ->select(['desember'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('desember');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $program1], ['program' => $ambil[$i]['program'], 'kegiatan' => null, 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $kegiatan1 = (new \yii\db\Query())
-                                        ->select(['desember'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null, 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('desember');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $kegiatan1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => null
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $output1 = (new \yii\db\Query())
-                                        ->select(['desember'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => null, 'subkomp' => null, 'akun' => null])->sum('desember');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $output1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => null, 'subkomp' => null, 'akun' => null])->execute();
-                        $komponen1 = (new \yii\db\Query())
-                                        ->select(['desember'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->sum('desember');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $komponen1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => null, 'akun' => null])->execute();
-                        $subkomp1 = (new \yii\db\Query())
-                                        ->select(['desember'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->sum('desember');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $subkomp1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => null])->execute();
-                        $akun1 = (new \yii\db\Query())
-                                        ->select(['desember'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->sum('desember');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $akun1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'vol' => 0, 'sat' => ''])->execute();
-                        $detil1 = (new \yii\db\Query())
-                                        ->select(['desember'])->from('dipabulanan')
-                                        ->where(['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output'], 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->sum('desember');
-                        Yii::$app->db->createCommand()
-                                ->update('dipabulanan', ['desember' => $ambil[$i]['realisasi'] + $detil1], ['program' => $ambil[$i]['program'], 'kegiatan' => $ambil[$i]['kegiatan'], 'output' => $ambil[$i]['output']
-                                    , 'komponen' => $ambil[$i]['komponen'], 'subkomp' => $ambil[$i]['subkomp'], 'akun' => $ambil[$i]['akun'], 'uraian' => $ambil[$i]['uraian']])->execute();
-                        break;
-                }
-                $updt = 'UPDATE `diparealisasi` SET `keterangan`= 1 WHERE 1';
-                \Yii::$app->db->createCommand($updt)->execute();
-            }
-        } else {
-           '';
-        }
-         return $this->render('index', [
-                        'searchModel' => $searchModel,
-                        'dataProvider' => $dataProvider,
-            ]);
+        return $this->render('index', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionView($id) {
@@ -1715,7 +1710,7 @@ class DiparealisasiController extends Controller {
                 Yii::$app->db->createCommand()
                         ->update('dipabulanan', ['desember' => $detil1 - $realisasi], ['program' => $program, 'kegiatan' => $kegiatan, 'output' => $output
                             , 'komponen' => $komponen, 'subkomp' => $subkomp, 'akun' => $akun, 'uraian' => $uraian])->execute();
-                 $dell = "DELETE FROM `diparealisasi` WHERE `id`= $id";
+                $dell = "DELETE FROM `diparealisasi` WHERE `id`= $id";
                 \Yii::$app->db->createCommand($dell)->execute();
                 break;
         }
