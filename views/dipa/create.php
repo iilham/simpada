@@ -33,15 +33,10 @@ if ($s == 1) {
         ?>
         <br>
         <br>
-        <a class="btn btn-primary btn-lg btn-block" href="#" role="button">Prosess</a>
+        <!--<a class="btn btn-primary btn-lg btn-block" href="#" role="button">Prosess</a>-->
         <div class="well">
-            <?=
-            Spinner::widget([
-                'preset' => Spinner::LARGE,
-                'color' => 'blue',
-                'align' => 'left'
-            ])
-            ?>
+        <?= Html::a('Process', ['/diparealisasi/synchron'], ['class'=>'btn btn-primary btn-lg btn-block']) ?>
+           
         </div>
 <?php } ?>
 

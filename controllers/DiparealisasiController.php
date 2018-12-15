@@ -567,6 +567,12 @@ class DiparealisasiController extends Controller {
             $updt = 'UPDATE `diparealisasi` SET `keterangan`= 1 WHERE 1';
             \Yii::$app->db->createCommand($updt)->execute();
         }
+        $searchModel = new DipabulananSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('index', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+        ]);
     }
     public function actionIndex() {
         $searchModel = new DipabulananSearch();
