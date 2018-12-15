@@ -1,6 +1,7 @@
 <?php
 use backend\assets\AppAsset;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -11,6 +12,7 @@ dmstr\web\AdminLteAsset::register($this);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
+    <link rel="shortcut icon" href="<?= Url::base();?>/image/bps.ico"></link>
     <meta charset="<?= Yii::$app->charset ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>

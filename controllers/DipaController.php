@@ -332,7 +332,7 @@ class DipaController extends Controller {
                 $uploadPath = "uploads/";
                 $succesSave = $model2->file->saveAs($uploadPath . $model2->file);
             }
-            Yii::$app->session->setFlash('success', 'Upload Sukses');
+            Yii::$app->session->setFlash('success', 'Upload RKAKL Berhasil');
         }
         return $this->render('create', [
                     'model' => $model, 'model2' => $model2,
