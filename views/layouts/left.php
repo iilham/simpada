@@ -6,7 +6,7 @@ $helper = Yii::$app->myHelper;
 ?>
 <aside class="main-sidebar">
 
-    <section class="sidebar">
+    <section class="sidebar-bg">
 
         <!-- Sidebar user panel -->
         <div class="user-panel">

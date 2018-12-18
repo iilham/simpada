@@ -55,9 +55,8 @@ use yii\helpers\Url;
                         </li>
                     </ul>
                 </li>
-
-                <!-- User Account: style can be found in dropdown.less -->
-<!--                <li>
+                <!--User Account: style can be found in dropdown.less 
+                <li>
                     <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                 </li>-->
             </ul>
