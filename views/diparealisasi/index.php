@@ -1,8 +1,6 @@
 <?php
 
-use yii\helpers\Html;
 use kartik\grid\GridView;
-use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\DiparealisasiSearch */
@@ -13,9 +11,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="dipa-index">
     <?=
-    GridView::widget([
+        GridView::widget([
         'dataProvider' => $dataProvider,
-//            'filterModel' => $searchModel,
         'bordered' => true,
         'striped' => true,
         'condensed' => true,
@@ -30,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'containerOptions' => ['style' => 'overflow: auto; font-size:12px;'], // only set when $responsive = false
         'headerRowOptions' => ['class' => 'text-center info'],
         'filterRowOptions' => ['class' => 'kartik-sheet-style'],
-//            'persistResize' => true,
         'beforeHeader' => [
                 [
                 'columns' => [
@@ -73,7 +69,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return number_format($data->dipa->jumlah, 0);
                 }
             ],
-//                'sat',
             [
                 'attribute' => 'januari',
                 'format' => 'html',
@@ -338,28 +333,3 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 </div>
 
-<?php
-$this->registerJs('
-        $("#inputcari").on("input", function(e){
-        if($(this).data("lastval") != $(this).val()){
-        $(this).data("lastval", $(this).val());
-        //change action
-        $("#buttoncari").attr("data-params", "{\"cari\":\""+$(this).val()+"\"}");
-        };
-        });
-        $("#inputcari").keypress(function (e) {
-        var key = e.which;
-        if(key == 13)
-        {
-        $("#buttoncari").click();
-        return false;
-        }
-        });
-        '
-)
-?>
-
-<div class="diparealisasi-index">
-
-
-</div>

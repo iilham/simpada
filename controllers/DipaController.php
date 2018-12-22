@@ -66,6 +66,7 @@ class DipaController extends Controller {
 //    UPDATE your_table SET column_that_you_want_to_change= REGEXP_REPLACE(column_that_you_want_to_change, '[[:space:]]+', ' ');
 //    UPDATE diparealisasi SET uraian= REGEXP_REPLACE(uraian, '[[:space:]]+', ' ');
     public function actionCreate() {
+        set_time_limit(0);
         $model = new Dipa();
         $model2 = new DipaMaster();
         if ($model2->load(Yii::$app->request->post())) {
@@ -322,7 +323,7 @@ class DipaController extends Controller {
                     }
                     $sql = 'INSERT INTO dipabulanan (dipa_id,kode,program,kegiatan,output,komponen,subkomp,akun, vol, sat, uraian) SELECT id,kode,program,kegiatan,output,komponen,subkomp,akun, vol, sat, uraian FROM dipa;';
                     \Yii::$app->db->createCommand($sql)->execute();
-                    Yii::$app->getSession()->setFlash('success', 'Success');
+                    // Yii::$app->getSession()->setFlash('success', 'Success');
                 } else {
                     Yii::$app->getSession()->setFlash('error', 'Error');
                 }
@@ -332,7 +333,7 @@ class DipaController extends Controller {
                 $uploadPath = "uploads/";
                 $succesSave = $model2->file->saveAs($uploadPath . $model2->file);
             }
-            Yii::$app->session->setFlash('success', 'Upload RKAKL Berhasil');
+            // Yii::$app->session->setFlash('success', 'Upload RKAKL Berhasil');
         }
         return $this->render('create', [
                     'model' => $model, 'model2' => $model2,

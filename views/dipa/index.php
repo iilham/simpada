@@ -57,7 +57,7 @@ Modal::end();
                         'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => ''],
                         'hover' => true,
                         'toolbar' => [
-                                ['content' =>
+                            ['content' =>
                                 Html::a('<i class = "glyphicon glyphicon-repeat"></i>', Url::toRoute([]), ['data-pjax' => 0, 'class' => 'btn btn-default', 'title' => Yii::t('kvgrid', 'Reset Grid')])
                             ],
                             '{toggleData}',
@@ -67,17 +67,17 @@ Modal::end();
                         'filterRowOptions' => ['class' => 'kartik-sheet-style'],
                         'persistResize' => false,
                         'columns' => [
-                                [
+                            [
                                 'attribute' => 'akun',
                                 'value' => 'akun',
                                 'contentOptions' => ['style' => 'width:6%'],
                             ],
-                                [
+                            [
                                 'attribute' => 'uraian',
                                 'value' => 'uraian',
                                 'contentOptions' => ['style' => 'font-size:11px;'],
                             ],
-                                [
+                            [
                                 'attribute' => 'jumlah',
                                 'value' => function($data) {
                                     return 'Rp ' . number_format($data->jumlah, 0);
@@ -85,7 +85,7 @@ Modal::end();
                                 'contentOptions' => ['class' => 'col-lg-1', 'style' => 'text-align: left; width:13%'],
                                 'filter' => false,
                             ],
-                                [
+                            [
                                 'header' => 'Sisa',
                                 'format' => 'html',
                                 'value' => function($data) {
@@ -129,7 +129,7 @@ Modal::end();
                                 'contentOptions' => ['class' => 'col-lg-1', 'style' => 'text-align: left;width:13%'],
                                 'filter' => false,
                             ],
-                                [
+                            [
                                 'class' => 'yii\grid\ActionColumn',
                                 'header' => '',
                                 'headerOptions' => ['style' => 'color:#337ab7'],
@@ -141,8 +141,8 @@ Modal::end();
                                         } else {
                                             return Html::a('<span class="glyphicon glyphicon-pencil" id = "modalButton"></span>', Url::toRoute(['/diparealisasi/update?program=' . $model->program . '&&kegiatan=' . $model->kegiatan . '&&output=' . $model->output .
                                                                 '&&suboutput=' . $model->suboutput . '&&komponen=' . $model->komponen .
-                                                                '&&subkomp=' . $model->subkomp . '&&akun=' . $model->akun . '&&uraian=' . $model->uraian . '&&urll=' . $_SERVER['REQUEST_URI']]), [
-                                                        'title' => Yii::t('app', 'update realisasi'), 'id' => 'modalButton',
+                                                                '&&subkomp=' . $model->subkomp . '&&akun=' . $model->akun . '&&uraian=' . $model->uraian]), [
+                                                        'title' => Yii::t('app', 'update realisasi'), 'id' => 'modalButton', 'data-toggle'=>"modal", 'data-target'=>"#myModal", 'data-title'=>"Entry Data",
 //                                                                    'target' => '_blank'
                                             ]);
                                         }
@@ -159,30 +159,31 @@ Modal::end();
             </div>
         </div>
     </div>
-
-
-    <?php
-//echo Yii::$app->formatter->asCurrency(9912321.00, 'EUR',[\NumberFormatter::MAX_SIGNIFICANT_DIGITS=>100]);
-    $this->registerJs('
-        
-$("#inputcari").on("input",function(e){
-  if($(this).data("lastval")!= $(this).val()){
-    $(this).data("lastval",$(this).val());
-    //change action
-    $("#buttoncari").attr("data-params","{\"cari\":\""+$(this).val()+"\"}");
-  };
-});
-$("#inputcari").keypress(function (e) {
- var key = e.which;
- if(key == 13)
-  {
-    $("#buttoncari").click();
-    return false;
-  }
-});
-        $("body").on("hidden.bs.modal", ".modal", function () {
-    $(this).removeData("bs.modal");
-})
-'
-    );
-    ?>
+</div>
+<?=
+    $this->registerJs("
+    $('#myModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var modal = $(this)
+        var title = button.data('title') 
+        var href = button.attr('href') 
+        modal.find('.modal-title').html(title)
+        modal.find('.modal-body').html('<i class=\"fa fa-spinner fa-spin\"></i>')
+        $.post(href)
+            .done(function( data ) {
+                modal.find('.modal-body').html(data)
+            });
+        })
+");
+?>
+<?php
+Modal::begin([
+    'id' => 'myModal',
+    'size' => 'modal-lg',
+    'header' => '<h5 class="modal-title">...</h5>',
+]);
+ 
+echo '...';
+ 
+Modal::end();
+?>

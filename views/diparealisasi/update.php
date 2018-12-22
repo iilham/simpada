@@ -11,9 +11,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Diparealisasis', 'url' => ['index'
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="diparealisasi-update">
-
-    <h1><?php // Html::encode($this->title) ?></h1>
-
     <?=
 //    print_r($dataProvider);
 //    die();
@@ -22,5 +19,4 @@ $this->params['breadcrumbs'][] = 'Update';
         'dataProvider' => $dataProvider,
     ])
     ?>
-
 </div>

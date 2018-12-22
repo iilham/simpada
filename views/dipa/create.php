@@ -16,14 +16,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
     <div class="dipa-create">
         <?php $form = ActiveForm::begin(); ?>
-        <div class="panel panel-primary">
-            <div class="panel-heading"><i class="fa fa-cog fa-spin fa-2x fa-fw"></i>Silahkan upload file RKAKL di sini!</div>
-            <div class="panel-body">
+        <div class="box box-primary">
+            <div class="box-header with-border"><i class="fa fa-cog fa-spin fa-2x fa-fw"></i>Silahkan upload file RKAKL di sini!</div>
+            <div class="box-body">
                 <?= $form->field($model2, 'file')->fileInput() ?>
                 <div class="form-group">
-                    <?= Html::submitButton('Upload', ['class' => 'btn btn-primary']); ?>
+                    <?= Html::submitButton('Upload', ['class' => 'btn btn-primary', 'onclick'=> 'myFunction()']); ?>
                 </div>
             </div>
+          <div id="loading"><br/><br/></div>
+        </div>
         </div>
         <?php
         ActiveForm::end();
@@ -38,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
           <h3 class="box-title"></h3>
           <div class="box-tools pull-right">
             <span class="label label-default">
-            untuk menggenerate file tekan tombol dibawah
+            file berhasil diUpload selanjutnya tekan tombol dibawah
             </span>
           </div><!-- /.box-tools -->
         </div><!-- /.box-header -->
@@ -48,12 +50,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <div id="loading"><br/><br/></div>
       </div><!-- /.box -->
         <?php } ?>
-</div>
-
 
 <script>
 function myFunction() {
     var d1 = document.getElementById('loading');
-   d1.insertAdjacentHTML('afterend', '<div class="overlay"><i class="fa fa-refresh fa-spin"></i></div>');
+   d1.insertAdjacentHTML('afterend', '<div class="overlay"><i class="fa fa-refresh fa-spin"></i><h2> Loading...</h2></div>');
   }
 </script>
